@@ -8,11 +8,10 @@ import { useAuth } from "../context/AuthContext";
 const navLinks = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
-  { name: "Features", href: "#features" },
-  { name: "Services", href: "#services" },
-  { name: "Exercise", href: "#exercise" },
-  { name: "Pricing", href: "#pricing" },
+  { name: "Programs", href: "#programs" },
+  { name: "Facilities", href: "#facilities" },
   { name: "Trainers", href: "#trainers" },
+  { name: "Membership", href: "#membership" },
   { name: "Contact", href: "#contact" }
 ];
 
@@ -81,10 +80,10 @@ export default function Navbar() {
               <div className="flex items-center gap-3">
                 <Link
                   to={isAdmin ? "/admin" : "/dashboard"}
-                  className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-xs font-bold tracking-wider text-accent transition-all hover:bg-accent hover:text-black shadow-glow"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs font-semibold tracking-wider text-white/80 transition-all hover:border-accent/40 hover:text-accent"
                 >
-                  {isAdmin ? <Shield className="h-3.5 w-3.5" /> : <User className="h-3.5 w-3.5" />}
-                  {isAdmin ? "ADMIN PORTAL" : "MEMBER DASHBOARD"}
+                  {isAdmin ? <Shield className="h-3.5 w-3.5 text-accent" /> : <User className="h-3.5 w-3.5 text-accent" />}
+                  <span>PORTAL</span>
                 </Link>
               </div>
             ) : (
@@ -95,12 +94,12 @@ export default function Navbar() {
                 >
                   LOG IN
                 </Link>
-                <Link
-                  to="/membership"
+                <a
+                  href="#membership"
                   className="inline-flex items-center justify-center rounded-full border border-accent bg-accent px-5 py-2.5 text-[11px] font-bold tracking-[0.2em] text-black shadow-glow transition duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(214,255,62,0.4)]"
                 >
                   JOIN NOW
-                </Link>
+                </a>
               </>
             )}
           </div>
@@ -110,9 +109,9 @@ export default function Navbar() {
             {isAuthenticated && (
               <Link
                 to={isAdmin ? "/admin" : "/dashboard"}
-                className="inline-flex items-center gap-1 rounded-full border border-accent/40 bg-accent/10 px-3 py-1.5 text-[10px] font-bold text-accent sm:hidden"
+                className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[10px] font-semibold text-white/80 sm:hidden"
               >
-                {isAdmin ? "Admin" : "Dashboard"}
+                Portal
               </Link>
             )}
             <button
@@ -154,10 +153,10 @@ export default function Navbar() {
                   <Link
                     to={isAdmin ? "/admin" : "/dashboard"}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent py-3 text-xs font-bold tracking-widest text-black shadow-glow"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 py-3 text-xs font-bold tracking-widest text-white transition hover:border-accent hover:text-accent"
                   >
-                    {isAdmin ? <Shield className="h-4 w-4" /> : <User className="h-4 w-4" />}
-                    {isAdmin ? "OPEN ADMIN PORTAL" : "OPEN MEMBER DASHBOARD"}
+                    {isAdmin ? <Shield className="h-4 w-4 text-accent" /> : <User className="h-4 w-4 text-accent" />}
+                    <span>OPEN PORTAL</span>
                   </Link>
                 ) : (
                   <>
@@ -168,13 +167,13 @@ export default function Navbar() {
                     >
                       LOG IN
                     </Link>
-                    <Link
-                      to="/membership"
+                    <a
+                      href="#membership"
                       onClick={() => setMobileMenuOpen(false)}
                       className="flex w-full items-center justify-center rounded-xl bg-accent py-3 text-xs font-bold tracking-widest text-black shadow-glow"
                     >
                       CHOOSE MEMBERSHIP
-                    </Link>
+                    </a>
                   </>
                 )}
               </div>

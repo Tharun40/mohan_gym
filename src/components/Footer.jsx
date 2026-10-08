@@ -58,36 +58,49 @@ export default function Footer() {
           {/* Quick Links */}
           <div>
             <h4 className="font-display text-xs font-bold uppercase tracking-[0.25em] text-white/50 mb-4">
-              EXPLORE
+              QUICK LINKS
             </h4>
             <ul className="space-y-2.5 text-xs text-white/70">
-              <li><a href="#about" className="hover:text-accent transition">About Club</a></li>
-              <li><a href="#features" className="hover:text-accent transition">Facilities & Gear</a></li>
-              <li><a href="#services" className="hover:text-accent transition">Coaching Programs</a></li>
-              <li><a href="#exercise" className="hover:text-accent transition">Workouts</a></li>
-              <li><a href="#pricing" className="hover:text-accent transition">Membership Pricing</a></li>
-              <li><a href="#trainers" className="hover:text-accent transition">Our Master Coaches</a></li>
+              <li><a href="#home" className="hover:text-accent transition">Home</a></li>
+              <li><a href="#about" className="hover:text-accent transition">About Mohan Gym</a></li>
+              <li><a href="#programs" className="hover:text-accent transition">Programs</a></li>
+              <li><a href="#facilities" className="hover:text-accent transition">Facilities & Features</a></li>
+              <li><a href="#trainers" className="hover:text-accent transition">Trainers</a></li>
+              <li><a href="#membership" className="hover:text-accent transition">Membership Plans</a></li>
+              <li><a href="#contact" className="hover:text-accent transition">Contact & Location</a></li>
             </ul>
           </div>
 
-          {/* Portals */}
+          {/* Operating Hours & Access */}
           <div>
             <h4 className="font-display text-xs font-bold uppercase tracking-[0.25em] text-white/50 mb-4">
-              PORTALS
+              CLUB HOURS
             </h4>
-            <ul className="space-y-2.5 text-xs text-white/70">
-              <li><Link to="/membership" className="hover:text-accent transition">Join Membership</Link></li>
-              <li><Link to="/login" className="hover:text-accent transition">Member Login</Link></li>
-              <li><Link to="/register" className="hover:text-accent transition">Create Account</Link></li>
-              <li><Link to="/dashboard" className="hover:text-accent transition">Member Dashboard</Link></li>
-              <li><Link to="/admin" className="hover:text-accent transition">Admin Management</Link></li>
-            </ul>
+            <div className="space-y-2.5 text-xs text-white/70">
+              <div>
+                <p className="text-white/40 text-[10px] uppercase font-semibold">Mon – Fri</p>
+                <p className="font-medium text-white">05:30 AM – 10:00 PM</p>
+              </div>
+              <div>
+                <p className="text-white/40 text-[10px] uppercase font-semibold">Saturday</p>
+                <p className="font-medium text-white">05:30 AM – 09:30 PM</p>
+              </div>
+              <div>
+                <p className="text-white/40 text-[10px] uppercase font-semibold">Sunday</p>
+                <p className="font-medium text-accent">06:00 AM – 01:00 PM</p>
+              </div>
+              <div className="pt-2 border-t border-white/5">
+                <Link to="/login" className="inline-block text-[11px] text-white/40 hover:text-accent transition">
+                  Member Login →
+                </Link>
+              </div>
+            </div>
           </div>
 
           {/* Contact Summary */}
           <div>
             <h4 className="font-display text-xs font-bold uppercase tracking-[0.25em] text-white/50 mb-4">
-              CLUB INFO
+              CLUB LOCATION
             </h4>
             <ul className="space-y-3 text-xs text-white/70">
               <li className="flex items-start gap-2">
@@ -96,11 +109,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 shrink-0 text-accent" />
-                <span>+91 98765 43210</span>
+                <a href="tel:+919876543210" className="hover:text-accent transition">+91 98765 43210</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 shrink-0 text-accent" />
-                <span>info@mohangym.com</span>
+                <a href="mailto:info@mohangym.com" className="hover:text-accent transition">info@mohangym.com</a>
               </li>
             </ul>
           </div>

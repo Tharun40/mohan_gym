@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Shield, User, Lock, Mail, ArrowRight, AlertCircle, Sparkles } from "lucide-react";
+import { Shield, User, Lock, Mail, ArrowRight, AlertCircle, CheckCircle2, X } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import logo from "../assets/logo.png";
 
@@ -10,6 +10,11 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Forgot password modal
+  const [forgotModalOpen, setForgotModalOpen] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotSuccess, setForgotSuccess] = useState(false);
 
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -56,6 +61,17 @@ export default function LoginPage() {
       setPassword("member123");
       handleLogin(null, "member@mohangym.com", "member123");
     }
+  };
+
+  const handleForgotPasswordSubmit = (e) => {
+    e.preventDefault();
+    if (!forgotEmail) return;
+    setForgotSuccess(true);
+    setTimeout(() => {
+      setForgotSuccess(false);
+      setForgotModalOpen(false);
+      setForgotEmail("");
+    }, 2500);
   };
 
   return (
@@ -127,7 +143,13 @@ export default function LoginPage() {
                 <label className="text-[11px] font-bold uppercase tracking-wider text-white/60">
                   Password
                 </label>
-                <span className="text-[11px] text-white/40">Any password for demo</span>
+                <button
+                  type="button"
+                  onClick={() => setForgotModalOpen(true)}
+                  className="text-[11px] text-accent hover:underline"
+                >
+                  Forgot Password?
+                </button>
               </div>
               <div className="relative">
                 <Lock className="absolute left-4 top-3.5 h-4 w-4 text-white/40" />
@@ -192,6 +214,54 @@ export default function LoginPage() {
           </div>
         </motion.div>
       </div>
+
+      {/* Forgot Password Modal */}
+      {forgotModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+          onClick={() => setForgotModalOpen(false)}
+        >
+          <div
+            className="w-full max-w-sm rounded-3xl border border-white/20 bg-[#0E0E0E] p-6 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <h3 className="font-display text-sm font-bold text-white uppercase tracking-wider">
+                Reset Password
+              </h3>
+              <button onClick={() => setForgotModalOpen(false)} className="text-white/40 hover:text-white">
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            {forgotSuccess ? (
+              <div className="py-6 text-center">
+                <CheckCircle2 className="mx-auto h-8 w-8 text-accent mb-2" />
+                <p className="text-xs font-bold text-white">Reset Link Sent!</p>
+                <p className="text-[11px] text-white/60 mt-1">Check your inbox for password recovery instructions.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleForgotPasswordSubmit} className="mt-4 space-y-3 text-xs">
+                <p className="text-white/60">Enter your registered email address to receive password reset instructions.</p>
+                <input
+                  type="email"
+                  required
+                  placeholder="e.g. member@mohangym.com"
+                  value={forgotEmail}
+                  onChange={(e) => setForgotEmail(e.target.value)}
+                  className="w-full rounded-xl border border-white/10 bg-black/60 px-4 py-2.5 text-xs text-white focus:border-accent focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  className="w-full rounded-xl bg-accent py-2.5 text-xs font-bold uppercase tracking-wider text-black shadow-glow"
+                >
+                  Send Reset Link
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -103,7 +103,7 @@ export default function PaymentSuccessPage() {
                 className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-accent py-4 text-xs font-bold uppercase tracking-[0.2em] text-black shadow-glow transition hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(214,255,62,0.4)] cursor-pointer"
               >
                 <Dumbbell className="h-4 w-4" />
-                <span>OPEN MEMBER DASHBOARD</span>
+                <span>GO TO DASHBOARD</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>

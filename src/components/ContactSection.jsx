@@ -124,10 +124,10 @@ export default function ContactSection() {
             className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 shadow-glass backdrop-blur-2xl lg:col-span-7"
           >
             <h3 className="font-display text-2xl font-bold text-white tracking-wide">
-              Request a Free Gym Tour & Trial
+              Request a Gym Tour & Consultation
             </h3>
             <p className="mt-2 text-xs text-white/60">
-              Leave your details below and our fitness consultants will reach out within 2 hours.
+              Leave a message below or call us directly at +91 98765 43210 to schedule a visit and discuss training options.
             </p>
 
             {submitted ? (
@@ -137,10 +137,18 @@ export default function ContactSection() {
                 className="mt-8 rounded-2xl border border-accent/40 bg-accent/10 p-6 text-center"
               >
                 <CheckCircle2 className="mx-auto h-10 w-10 text-accent mb-3" />
-                <h4 className="font-display text-lg font-bold text-white">Message Received!</h4>
-                <p className="mt-1 text-xs text-white/80">
-                  Thank you! Our head coach will contact you shortly to confirm your visit.
+                <h4 className="font-display text-lg font-bold text-white">Inquiry Received</h4>
+                <p className="mt-2 text-xs text-white/80 leading-relaxed max-w-md mx-auto">
+                  Thank you! For immediate assistance or direct spot confirmation, you can reach our front desk directly at{" "}
+                  <a href="tel:+919876543210" className="text-accent underline font-semibold">+91 98765 43210</a> or visit our Gandhipuram facility during operating hours.
                 </p>
+                <button
+                  type="button"
+                  onClick={() => setSubmitted(false)}
+                  className="mt-4 text-xs font-semibold text-accent hover:underline"
+                >
+                  Send another inquiry
+                </button>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="mt-8 space-y-4">

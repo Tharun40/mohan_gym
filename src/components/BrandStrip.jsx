@@ -4,7 +4,7 @@ const brands = ["NIKE", "PUMA", "ADIDAS", "UNDER ARMOUR", "REEBOK", "GYMSHARK"];
 
 export default function BrandStrip() {
   return (
-    <section id="about" className="px-4 py-10 sm:px-6 lg:px-8">
+    <section className="px-4 py-10 sm:px-6 lg:px-8">
       <motion.div
         className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-4 rounded-[2rem] border border-white/8 bg-white/[0.03] px-6 py-6 backdrop-blur-xl sm:gap-6"
         initial={{ opacity: 0, y: 32 }}

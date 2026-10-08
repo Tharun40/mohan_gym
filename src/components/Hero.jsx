@@ -1,14 +1,16 @@
 import { Link } from "react-router-dom";
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useAuth } from "../context/AuthContext";
 import bodyImg from "../assets/body.png";
 
 const stats = [
-  { label: "Hours", value: "1.5", className: "top-6 left-6" },
-  { label: "Calories", value: "550", className: "top-6 right-6" },
-  { label: "Poses", value: "20", className: "bottom-6 left-6" },
-  { label: "Sets", value: "5", className: "bottom-6 right-6" },
+  { label: "Focus", value: "Strength", className: "top-6 left-6" },
+  { label: "Coaching", value: "1-on-1", className: "top-6 right-6" },
+  { label: "Training", value: "Heavy Iron", className: "bottom-6 left-6" },
+  { label: "Location", value: "Coimbatore", className: "bottom-6 right-6" },
 ];
 export default function Hero() {
+  const { isAuthenticated } = useAuth();
   const easeOut = "easeOut";
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -95,7 +97,7 @@ export default function Hero() {
             whileHover={{ borderColor: "rgba(255,255,255,0.25)" }}
           >
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            ELITE PERFORMANCE
+            MOHAN GYM • COIMBATORE
           </motion.div>
 
           <motion.span
@@ -104,20 +106,20 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.28, ease: easeOut }}
           >
-            TRANSFORM YOUR LIMITS
+            REAL COACHING • REAL RESULTS
           </motion.span>
 
           {/* Hero headline */}
-          <h1 className="mt-3 font-display text-6xl font-bold leading-[1] tracking-tight text-white">
-            Sculpt Your Body,
+          <h1 className="mt-3 font-display text-5xl sm:text-6xl font-bold leading-[1.05] tracking-tight text-white">
+            Train Strong.
             <span className="mt-2 block text-[#D6FF3E]">
-              Elevate Your Spirit
+              Become Stronger.
             </span>
           </h1>
 
           {/* Description */}
           <p className="mt-6 max-w-lg text-sm leading-relaxed text-white/70 sm:text-base lg:text-[15px]">
-            Transform your fitness journey with precision coaching, elite recovery, and a membership that elevates every session.
+            Coimbatore’s dedicated training center for authentic strength development, hypertrophy, and disciplined personal coaching. Built for everyone serious about physical progress.
           </p>
 
           {/* CTA */}
@@ -127,39 +129,18 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3, ease: easeOut }}
           >
-            <Link
-              to="/membership"
+            <a
+              href="#programs"
               className="px-8 py-3 rounded-full bg-[#D6FF3E] text-black font-semibold tracking-wider text-xs uppercase transition shadow-[0_10px_30px_rgba(214,255,62,0.3)] hover:scale-105 hover:shadow-[0_15px_40px_rgba(214,255,62,0.5)]"
             >
-              Get Started
-            </Link>
+              Explore Programs
+            </a>
             <a
-              href="#pricing"
+              href="#membership"
               className="rounded-full border border-white/20 bg-white/[0.05] px-6 py-3 text-[11px] font-semibold tracking-[0.2em] text-white/80 backdrop-blur-lg hover:bg-white/10 hover:border-accent/40 hover:text-accent transition-all duration-300"
             >
               EXPLORE PLANS
             </a>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div 
-            className="mt-8 grid max-w-md gap-4 sm:grid-cols-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.4, ease: easeOut }}
-          >
-            <div className="rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-md shadow-[0_8px_25px_rgba(0,0,0,0.5)]">
-              <p className="text-[9px] font-bold tracking-wider text-white/50 uppercase">Members</p>
-              <p className="mt-2 font-display text-2xl font-bold text-white">18K+</p>
-            </div>
-            <div className="rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-md shadow-[0_8px_25px_rgba(0,0,0,0.5)]">
-              <p className="text-[9px] font-bold tracking-wider text-white/50 uppercase">Success</p>
-              <p className="mt-2 font-display text-2xl font-bold text-white">94%</p>
-            </div>
-            <div className="rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-md shadow-[0_8px_25px_rgba(0,0,0,0.5)]">
-              <p className="text-[9px] font-bold tracking-wider text-white/50 uppercase">Rating</p>
-              <p className="mt-2 font-display text-2xl font-bold text-white">4.9/5</p>
-            </div>
           </motion.div>
         </motion.div>
 

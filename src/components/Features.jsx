@@ -5,34 +5,34 @@ import SectionIntro from "./ui/SectionIntro";
 
 const featureList = [
   {
-    icon: HeartPulse,
-    title: "Nutrition Guidance",
-    text: "Precision meal plans that match your training blocks and recovery cycles.",
-  },
-  {
     icon: Medal,
-    title: "Expert Trainers",
-    text: "Elite coaches focused on movement quality, strength, and aesthetics.",
-  },
-  {
-    icon: Sparkles,
-    title: "Progress Tracking",
-    text: "Data-rich insights for composition, performance, and long-term momentum.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Premium Membership",
-    text: "Priority booking, recovery suites, and concierge-level service.",
-  },
-  {
-    icon: Users,
-    title: "Community Support",
-    text: "A curated fitness community that keeps standards high and energy higher.",
+    title: "Experienced Trainers",
+    text: "Certified coaches focused on movement mechanics, progressive overload, and injury-free strength building.",
   },
   {
     icon: Dumbbell,
-    title: "Next-Level Fitness Spaces",
-    text: "Architectural training zones designed for focus, power, and flow.",
+    title: "Quality Equipment",
+    text: "Heavy-duty free weights, olympic barbells, calibrated plates, and precision resistance machines.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Clean Training Environment",
+    text: "Sanitized gym floor, disciplined equipment care, and a spotless, well-ventilated training space.",
+  },
+  {
+    icon: HeartPulse,
+    title: "Personal Guidance",
+    text: "Structured workout plans, form correction, and tailored nutrition recommendations for your goals.",
+  },
+  {
+    icon: Users,
+    title: "Supportive Community",
+    text: "A motivating, ego-free atmosphere where beginners and seasoned lifters push each other forward.",
+  },
+  {
+    icon: Sparkles,
+    title: "Flexible Training Options",
+    text: "Extended morning and evening workout slots designed to fit students and working professionals.",
   },
 ];
 
@@ -41,12 +41,14 @@ const imageUrl =
 
 export default function Features() {
   return (
-    <section id="features" className="px-4 py-28 sm:px-6 lg:px-8">
+    <section id="features" className="relative px-4 py-28 sm:px-6 lg:px-8">
+      <span id="about" className="absolute -top-24" />
+      <span id="facilities" className="absolute -top-24" />
       <div className="mx-auto max-w-7xl">
         <SectionIntro
-          eyebrow="WHY FITUSION"
-          title="Inspired to Inspire Your Best Self"
-          description="Every detail is tuned for a stronger physique, clearer focus, and a training atmosphere that feels unmistakably premium."
+          eyebrow="WHY MOHAN GYM"
+          title="Built For Serious, Lasting Progress"
+          description="Every detail is focused on real physical progress: authentic coaching, quality iron, and an atmosphere where you stay focused on your training."
         />
 
         <div className="mt-16 grid items-center gap-14 lg:grid-cols-[1.02fr_0.98fr]">

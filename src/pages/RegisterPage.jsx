@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { User, Mail, Phone, Lock, ArrowRight, AlertCircle } from "lucide-react";
+import { User, Mail, Phone, Lock, ArrowRight, AlertCircle, ShieldCheck } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import logo from "../assets/logo.png";
 
 export default function RegisterPage() {
+  const [searchParams] = useSearchParams();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,32 +20,61 @@ export default function RegisterPage() {
   const { register } = useAuth();
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validatePhone = (phone) => {
+    const cleaned = phone.replace(/[^0-9]/g, "");
+    return cleaned.length >= 10;
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.password) {
-      setError("Please fill out all required fields.");
+    if (!formData.name.trim()) {
+      setError("Please enter your full name.");
+      return;
+    }
+
+    if (!formData.email.trim() || !validateEmail(formData.email.trim())) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (!formData.phone.trim() || !validatePhone(formData.phone.trim())) {
+      setError("Please enter a valid 10-digit phone number.");
+      return;
+    }
+
+    if (!formData.password || formData.password.length < 6) {
+      setError("Password must be at least 6 characters long.");
       return;
     }
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match.");
+      setError("Passwords do not match. Please re-enter.");
       return;
     }
 
     setIsSubmitting(true);
     const res = await register({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
       password: formData.password
     });
     setIsSubmitting(false);
 
     if (res.success) {
-      // Direct newly registered members straight to choosing a membership!
-      navigate("/membership");
+      const plan = searchParams.get("plan");
+      const addons = searchParams.get("addons");
+      if (plan) {
+        navigate(`/checkout?plan=${plan}${addons ? `&addons=${addons}` : ""}`);
+      } else {
+        navigate("/membership");
+      }
     } else {
       setError(res.error || "Failed to create account.");
     }
@@ -140,7 +170,7 @@ export default function RegisterPage() {
                 <input
                   type="tel"
                   required
-                  placeholder="e.g. +91 98401 23456"
+                  placeholder="e.g. 9840123456"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                   className="w-full rounded-xl border border-white/10 bg-black/60 pl-11 pr-4 py-3 text-sm text-white placeholder-white/30 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
@@ -158,7 +188,7 @@ export default function RegisterPage() {
                   <input
                     type="password"
                     required
-                    placeholder="••••••••"
+                    placeholder="Min 6 characters"
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                     className="w-full rounded-xl border border-white/10 bg-black/60 pl-11 pr-4 py-3 text-sm text-white placeholder-white/30 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
@@ -175,7 +205,7 @@ export default function RegisterPage() {
                   <input
                     type="password"
                     required
-                    placeholder="••••••••"
+                    placeholder="Repeat password"
                     value={formData.confirmPassword}
                     onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                     className="w-full rounded-xl border border-white/10 bg-black/60 pl-11 pr-4 py-3 text-sm text-white placeholder-white/30 focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
@@ -193,7 +223,7 @@ export default function RegisterPage() {
                 <span>CREATING ACCOUNT...</span>
               ) : (
                 <>
-                  <span>CREATE ACCOUNT & SELECT PLAN</span>
+                  <span>CREATE ACCOUNT & PROCEED</span>
                   <ArrowRight className="h-4 w-4" />
                 </>
               )}

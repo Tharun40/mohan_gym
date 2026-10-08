@@ -1,104 +1,124 @@
 import { motion } from "framer-motion";
+import { Dumbbell, Flame, Target, UserCheck, Activity, Check, ArrowRight } from "lucide-react";
+import SectionIntro from "./ui/SectionIntro";
 
 const programs = [
   {
-    name: "Basic Plan",
-    price: "₹799",
-    duration: "3 Months",
-    features: ["Workout Chart"],
-    popular: false,
+    icon: Dumbbell,
+    title: "Strength Training",
+    badge: "Compound Power",
+    description:
+      "Master essential barbell lifts—squat, bench press, deadlift, and overhead press—with strict focus on progressive overload and biomechanical efficiency.",
+    benefits: ["Barbell compound mechanics", "Progressive overload protocols", "Form inspection & injury prevention"],
   },
   {
-    name: "Premium Plan",
-    price: "₹1499",
-    duration: "6 Months",
-    features: ["Diet Chart"],
-    popular: true,
+    icon: Target,
+    title: "Muscle Building",
+    badge: "Hypertrophy Focus",
+    description:
+      "Targeted volume routines engineered to build dense, balanced muscle mass using a mix of heavy compound sets and precision isolation movements.",
+    benefits: ["Strategic muscle split design", "Time-under-tension control", "Symmetry & aesthetic development"],
   },
   {
-    name: "Platinum Plan",
-    price: "₹2799",
-    duration: "1 Year",
-    features: ["Workout Chart + Diet Chart"],
-    popular: false,
+    icon: Flame,
+    title: "Weight Loss / Fat Loss",
+    badge: "Metabolic Conditioning",
+    description:
+      "High-density training sessions combining resistance circuits, conditioning, and sustainable metabolic stimulus to burn fat while preserving muscle.",
+    benefits: ["Metabolic resistance circuits", "Cardiovascular stamina", "Lean muscle preservation"],
+  },
+  {
+    icon: UserCheck,
+    title: "Personal Training",
+    badge: "1-on-1 Coaching",
+    description:
+      "Dedicated one-on-one attention from experienced coaches. Get fully tailored programming, immediate form correction, and accountable guidance.",
+    benefits: ["Individualized workout blueprint", "Real-time technique adjustments", "Consistent coach accountability"],
+  },
+  {
+    icon: Activity,
+    title: "General Fitness",
+    badge: "Mobility & Health",
+    description:
+      "Balanced functional training for all fitness levels, focusing on cardiovascular health, joint mobility, core strength, and everyday stamina.",
+    benefits: ["Functional movement patterns", "Joint mobility & posture health", "Sustainable long-term conditioning"],
   },
 ];
 
-const extras = ["Workout Chart - ₹200", "Diet Chart - ₹300"];
-
 export default function ProgramSection() {
   return (
-    <motion.section
-      className="relative bg-[#0A0A0A] px-4 py-32 sm:px-6 lg:px-8"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-    >
-      {/* Smooth transition gradient from hero */}
-      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-transparent to-black pointer-events-none" />
-      
-      {/* Continue light flow */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-[#D6FF3E]/5 blur-[160px] -z-10" />
-      <div className="mx-auto max-w-6xl">
-        <div className="mb-8 text-center relative z-10">
-          <motion.h2
-            className="text-3xl font-bold text-white sm:text-4xl"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            Choose Your Program
-          </motion.h2>
-        </div>
+    <section id="programs" className="relative bg-[#0A0A0A] px-4 py-28 sm:px-6 lg:px-8">
+      {/* Background glow flow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#D6FF3E]/4 blur-[160px] pointer-events-none -z-10" />
 
-        <div className="mb-10 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-center text-sm text-white/80">
-          Admission Fee ₹300 <span className="mx-2 text-white/30">|</span> Monthly Fee ₹300
-        </div>
+      <div className="mx-auto max-w-7xl">
+        <SectionIntro
+          eyebrow="TRAINING PROGRAMS"
+          title="Structured Regimens For Real Results"
+          description="Whatever your objective, our structured programs are engineered for focused progression, safe execution, and lasting physical transformation."
+        />
 
-        <div className="grid gap-6 md:grid-cols-3 md:gap-8 relative z-10">
-          {programs.map((program, index) => (
-            <motion.article
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2, ease: "easeOut" }}
-              whileHover={{ scale: 1.02, rotateX: 4, rotateY: -4, transition: { type: "spring", stiffness: 120, damping: 18 } }}
-              key={program.name}
-              style={{ transformStyle: "preserve-3d" }}
-              className={[
-                "rounded-2xl border border-white/10 bg-white/5 p-6",
-                program.popular ? "scale-[1.01] border-white/25 shadow-[0_0_0_1px_rgba(255,255,255,0.06)]" : "",
-                "will-change-transform transform-gpu",
-              ].join(" ")}
-            >
-              <h3 className="text-xl font-semibold text-white">{program.name}</h3>
-              <p className="mt-3 text-3xl font-bold text-white">{program.price}</p>
-              <p className="mt-2 text-sm text-white/70">Duration: {program.duration}</p>
+        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {programs.map((program, index) => {
+            const Icon = program.icon;
+            const isSpan = index === 4; // Center the 5th item on large screens if desired or let it fit naturally
 
-              <ul className="mt-6 space-y-2 text-sm text-white/80">
-                {program.features.map((feature) => (
-                  <li key={feature}>• {feature}</li>
-                ))}
-              </ul>
-
-              <button
-                type="button"
-                className="mt-8 w-full rounded-lg border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-white/15"
+            return (
+              <motion.article
+                key={program.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ y: -6 }}
+                className={`relative flex flex-col justify-between rounded-3xl border border-white/10 bg-white/[0.03] p-7 shadow-glass backdrop-blur-xl transition-all duration-300 hover:border-accent/40 hover:bg-white/[0.05] ${
+                  isSpan ? "md:col-span-2 lg:col-span-1" : ""
+                }`}
               >
-                Get Started
-              </button>
-            </motion.article>
-          ))}
-        </div>
+                <div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-accent/25 bg-accent/10 text-accent shadow-glow">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-semibold tracking-wider text-accent uppercase">
+                      {program.badge}
+                    </span>
+                  </div>
 
-        <div className="mt-12 border-t border-white/10 pt-8 relative z-10">
-          <h3 className="text-lg font-semibold text-white">Extras</h3>
-          <ul className="mt-4 space-y-2 text-sm text-white/80">
-            {extras.map((extra) => (
-              <li key={extra}>{extra}</li>
-            ))}
-          </ul>
+                  <h3 className="mt-6 font-display text-2xl font-bold text-white tracking-wide">
+                    {program.title}
+                  </h3>
+
+                  <p className="mt-3 text-xs leading-relaxed text-white/60">
+                    {program.description}
+                  </p>
+
+                  <ul className="mt-6 space-y-2.5 border-t border-white/10 pt-5">
+                    {program.benefits.map((benefit) => (
+                      <li key={benefit} className="flex items-center gap-2.5 text-xs text-white/80">
+                        <div className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent">
+                          <Check className="h-2.5 w-2.5 stroke-[3]" />
+                        </div>
+                        <span>{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mt-8 pt-4">
+                  <a
+                    href="#contact"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 py-2.5 text-xs font-semibold tracking-wider text-white transition hover:border-accent hover:bg-accent hover:text-black"
+                  >
+                    <span>INQUIRE ABOUT PROGRAM</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }

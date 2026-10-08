@@ -1,12 +1,9 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
-import BrandStrip from "../components/BrandStrip";
-import InteractiveStrip from "../components/InteractiveStrip";
 import Features from "../components/Features";
-import Services from "../components/Services";
-import ExerciseShowcase from "../components/ExerciseShowcase";
-import PricingSection from "../components/PricingSection";
+import ProgramSection from "../components/ProgramSection";
 import TrainersSection from "../components/TrainersSection";
+import PricingSection from "../components/PricingSection";
 import TestimonialsSection from "../components/TestimonialsSection";
 import ContactSection from "../components/ContactSection";
 import FinalCTASection from "../components/FinalCTASection";
@@ -25,13 +22,10 @@ export default function LandingPage() {
 
       <main className="relative">
         <Hero />
-        <BrandStrip />
-        <InteractiveStrip />
         <Features />
-        <Services />
-        <ExerciseShowcase />
-        <PricingSection />
+        <ProgramSection />
         <TrainersSection />
+        <PricingSection />
         <TestimonialsSection />
         <ContactSection />
         <FinalCTASection />

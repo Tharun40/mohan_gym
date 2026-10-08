@@ -353,30 +353,34 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
-                {/* Submit Payment CTA */}
+                {/* Demo Payment Notice & CTA */}
+                <div className="mt-6 rounded-xl border border-accent/30 bg-accent/10 p-3 text-center text-[11px] text-accent">
+                  ⚡ <strong>DEMO MODE</strong>: Click below to simulate instant gateway verification & membership activation.
+                </div>
+
                 <button
                   type="button"
                   disabled={isProcessing}
                   onClick={handlePayNow}
-                  className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-accent py-4 text-xs font-bold uppercase tracking-[0.2em] text-black shadow-glow transition hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(214,255,62,0.45)] disabled:opacity-50 cursor-pointer"
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-accent py-4 text-xs font-bold uppercase tracking-[0.2em] text-black shadow-glow transition hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(214,255,62,0.45)] disabled:opacity-50 cursor-pointer"
                 >
                   {isProcessing ? (
                     <span className="flex items-center gap-2">
                       <span className="h-4 w-4 animate-spin rounded-full border-2 border-black border-t-transparent" />
-                      PROCESSING PAYMENT...
+                      SIMULATING PAYMENT VERIFICATION...
                     </span>
                   ) : (
                     <>
                       <Lock className="h-4 w-4" />
-                      <span>PAY ₹{grandTotal} & ACTIVATE</span>
+                      <span>COMPLETE DEMO PAYMENT (₹{grandTotal})</span>
                       <ArrowRight className="h-4 w-4" />
                     </>
                   )}
                 </button>
 
-                <div className="mt-6 flex items-center justify-center gap-2 text-[11px] text-white/50">
+                <div className="mt-4 flex items-center justify-center gap-2 text-[11px] text-white/50">
                   <ShieldCheck className="h-4 w-4 text-accent" />
-                  <span>256-Bit SSL Encrypted & PCI Compliant</span>
+                  <span>Demo Gateway Sandbox · Safe & Instant Activation</span>
                 </div>
               </div>
             </div>

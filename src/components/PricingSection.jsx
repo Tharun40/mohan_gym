@@ -30,11 +30,12 @@ export default function PricingSection() {
     if (selectedAddonIds.length > 0) {
       queryParams.set("addons", selectedAddonIds.join(","));
     }
-    navigate(`/checkout?${queryParams.toString()}`);
+    navigate(`/membership?${queryParams.toString()}`);
   };
 
   return (
-    <section id="pricing" className="relative bg-[#0A0A0A] px-4 py-28 sm:px-6 lg:px-8">
+    <section id="membership" className="relative bg-[#0A0A0A] px-4 py-28 sm:px-6 lg:px-8">
+      <span id="pricing" className="absolute -top-24" />
       {/* Background glow flow */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#D6FF3E]/5 blur-[180px] -z-10 pointer-events-none" />
 
