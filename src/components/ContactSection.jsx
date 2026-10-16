@@ -52,9 +52,20 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-display text-lg font-bold text-white">Club Location</h4>
-                  <p className="mt-1 text-sm text-white/70 leading-relaxed">
-                    Mohan Gym Performance Club, 24 Cross Cut Road, Gandhipuram, Coimbatore, Tamil Nadu 641012
+                  <p className="mt-1 text-sm font-semibold text-white/90">
+                    Mohan Gym
                   </p>
+                  <p className="mt-0.5 text-sm text-white/70 leading-relaxed">
+                    Ingur–Chennimalai Road, near Bajaj Showroom, Chennimalai, Tamil Nadu
+                  </p>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Mohan+Gym+Ingur+Chennimalai+Road+near+Bajaj+Showroom+Chennimalai+Tamil+Nadu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2.5 inline-flex items-center gap-1.5 text-xs font-semibold text-accent hover:underline"
+                  >
+                    View location on Google Maps →
+                  </a>
                 </div>
               </div>
             </div>
@@ -99,18 +110,45 @@ export default function ContactSection() {
                 </h4>
               </div>
 
-              <div className="space-y-2.5 text-xs">
-                <div className="flex justify-between border-b border-white/10 pb-2">
-                  <span className="text-white/70">Monday – Friday</span>
-                  <span className="font-bold text-white">05:30 AM – 10:00 PM</span>
+              <div className="space-y-4 text-xs">
+                {/* Monday - Saturday */}
+                <div className="border-b border-white/10 pb-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-bold text-white">Monday – Saturday</span>
+                    <span className="rounded-full bg-accent/15 px-2.5 py-0.5 text-[10px] font-semibold text-accent">
+                      Two Sessions
+                    </span>
+                  </div>
+                  <div className="space-y-1.5 pl-3 border-l-2 border-accent/30 text-white/80">
+                    <div className="flex justify-between">
+                      <span className="text-white/60">Morning session:</span>
+                      <span className="font-medium text-white">5:00 AM – 9:00 AM</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-white/60">Evening session:</span>
+                      <span className="font-medium text-white">5:00 PM – 9:00 PM</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex justify-between border-b border-white/10 pb-2">
-                  <span className="text-white/70">Saturday</span>
-                  <span className="font-bold text-white">05:30 AM – 09:30 PM</span>
-                </div>
-                <div className="flex justify-between pt-1">
-                  <span className="text-white/70">Sunday</span>
-                  <span className="font-bold text-accent">06:00 AM – 01:00 PM</span>
+
+                {/* Sunday */}
+                <div className="pt-1">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="font-bold text-white">Sunday</span>
+                    <span className="rounded-full bg-white/10 px-2.5 py-0.5 text-[10px] font-semibold text-white/60">
+                      Morning Only
+                    </span>
+                  </div>
+                  <div className="space-y-1.5 pl-3 border-l-2 border-white/20 text-white/80">
+                    <div className="flex justify-between">
+                      <span className="text-white/60">Morning session:</span>
+                      <span className="font-medium text-accent">5:00 AM – 9:00 AM</span>
+                    </div>
+                    <div className="flex justify-between text-white/40">
+                      <span>Evening session:</span>
+                      <span className="font-semibold text-white/40">Closed</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -140,7 +178,7 @@ export default function ContactSection() {
                 <h4 className="font-display text-lg font-bold text-white">Inquiry Received</h4>
                 <p className="mt-2 text-xs text-white/80 leading-relaxed max-w-md mx-auto">
                   Thank you! For immediate assistance or direct spot confirmation, you can reach our front desk directly at{" "}
-                  <a href="tel:+919876543210" className="text-accent underline font-semibold">+91 98765 43210</a> or visit our Gandhipuram facility during operating hours.
+                  <a href="tel:+919876543210" className="text-accent underline font-semibold">+91 98765 43210</a> or visit our Chennimalai facility during operating hours.
                 </p>
                 <button
                   type="button"

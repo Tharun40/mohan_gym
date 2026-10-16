@@ -36,7 +36,7 @@ export default function Navbar() {
 
   return (
     <motion.header
-      className="fixed left-1/2 top-5 z-50 w-full -translate-x-1/2 px-4 sm:px-6 lg:px-8"
+      className="fixed inset-x-0 top-5 z-50 w-full px-4 sm:px-6 lg:px-8"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -61,7 +61,7 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav Items */}
-          <div className="hidden items-center gap-6 xl:gap-8 lg:flex">
+          <div className="hidden items-center gap-4 lg:gap-5 xl:gap-8 lg:flex">
             {navLinks.map((item) => (
               <a
                 key={item.name}

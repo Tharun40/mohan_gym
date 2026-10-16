@@ -7,7 +7,7 @@ const stats = [
   { label: "Focus", value: "Strength", className: "top-6 left-6" },
   { label: "Coaching", value: "1-on-1", className: "top-6 right-6" },
   { label: "Training", value: "Heavy Iron", className: "bottom-6 left-6" },
-  { label: "Location", value: "Coimbatore", className: "bottom-6 right-6" },
+  { label: "Location", value: "Chennimalai", className: "bottom-6 right-6" },
 ];
 export default function Hero() {
   const { isAuthenticated } = useAuth();
@@ -97,7 +97,7 @@ export default function Hero() {
             whileHover={{ borderColor: "rgba(255,255,255,0.25)" }}
           >
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            MOHAN GYM • COIMBATORE
+            MOHAN GYM • CHENNIMALAI
           </motion.div>
 
           <motion.span
@@ -110,16 +110,16 @@ export default function Hero() {
           </motion.span>
 
           {/* Hero headline */}
-          <h1 className="mt-3 font-display text-5xl sm:text-6xl font-bold leading-[1.05] tracking-tight text-white">
-            Train Strong.
+          <h1 className="mt-3 font-display text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-[3.4rem] font-bold leading-[1.08] tracking-tight text-white">
+            Build Your Body.
             <span className="mt-2 block text-[#D6FF3E]">
-              Become Stronger.
+              Build Your Confidence.
             </span>
           </h1>
 
           {/* Description */}
           <p className="mt-6 max-w-lg text-sm leading-relaxed text-white/70 sm:text-base lg:text-[15px]">
-            Coimbatore’s dedicated training center for authentic strength development, hypertrophy, and disciplined personal coaching. Built for everyone serious about physical progress.
+            Train at your own pace. Get stronger, feel better, and become more confident with every workout.
           </p>
 
           {/* CTA */}

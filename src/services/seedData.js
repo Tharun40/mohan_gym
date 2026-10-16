@@ -76,43 +76,34 @@ export const INITIAL_ADDONS = [
 export const INITIAL_TRAINERS = [
   {
     id: "trainer-1",
-    name: "Mohan Raj",
-    specialization: "Head Strength Coach & Master Trainer",
-    experience: "12+ Years",
-    image: "https://images.unsplash.com/photo-1567013127542-490d757e51fc?auto=format&fit=crop&w=800&q=80",
-    bio: "Founder of Mohan Gym with over a decade of shaping national physique competitors and elite powerlifters.",
-    programs: ["Strength Sculpt", "Hypertrophy Mastery"],
-    active: true,
-    instagram: "@mohan_fitness"
+    name: "Mohan",
+    role: "Gym Owner",
+    specialization: "Gym Owner",
+    bio: "Meet Mohan, the owner of Mohan Gym, helping build a welcoming place for people to work towards their fitness goals.",
+    active: true
   },
   {
     id: "trainer-2",
-    name: "Kavitha Selvan",
-    specialization: "Conditioning & Functional Mobility",
-    experience: "7+ Years",
-    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=800&q=80",
-    bio: "Specializes in high-intensity conditioning, posture realignment, and athletic agility protocols.",
-    programs: ["Athletic Burn", "Mobility Reset"],
-    active: true,
-    instagram: "@kavitha_trains"
+    name: "Gowrishankar",
+    role: "Gym Trainer",
+    specialization: "Gym Trainer",
+    bio: "Meet Gowrishankar, the trainer at Mohan Gym, supporting members as they work towards their fitness goals.",
+    active: true
   },
   {
     id: "trainer-3",
-    name: "Vikram Sengupta",
-    specialization: "Body Transformation & Nutrition",
-    experience: "9+ Years",
-    image: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=80",
-    bio: "Expert in customized contest prep, metabolic conditioning, and lean muscle mass acceleration.",
-    programs: ["Lean Physique", "Powerlifting Block"],
-    active: true,
-    instagram: "@vikram_iron"
+    name: "Rajesh",
+    role: "Physiologist",
+    specialization: "Physiologist",
+    bio: "Meet Rajesh, the physiologist associated with Mohan Gym.",
+    active: true
   }
 ];
 
 export const INITIAL_USERS = [
   {
     id: "user-admin",
-    name: "Mohan Raj (Admin)",
+    name: "Mohan (Admin)",
     email: "admin@mohangym.com",
     phone: "+91 98765 43210",
     role: "admin",

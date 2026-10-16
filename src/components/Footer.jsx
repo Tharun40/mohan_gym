@@ -30,7 +30,7 @@ export default function Footer() {
             </Link>
 
             <p className="max-w-sm text-xs leading-relaxed text-white/60">
-              The premier strength, physique conditioning, and transformation sanctuary in Coimbatore. Built for athletes and individuals serious about lasting performance.
+              The premier strength, physique conditioning, and transformation sanctuary in Chennimalai. Built for athletes and individuals serious about lasting performance.
             </p>
 
             <div className="flex items-center gap-3 pt-2">
@@ -76,18 +76,16 @@ export default function Footer() {
             <h4 className="font-display text-xs font-bold uppercase tracking-[0.25em] text-white/50 mb-4">
               CLUB HOURS
             </h4>
-            <div className="space-y-2.5 text-xs text-white/70">
+            <div className="space-y-3 text-xs text-white/70">
               <div>
-                <p className="text-white/40 text-[10px] uppercase font-semibold">Mon – Fri</p>
-                <p className="font-medium text-white">05:30 AM – 10:00 PM</p>
+                <p className="text-white/40 text-[10px] uppercase font-semibold">Mon – Sat (Two Sessions)</p>
+                <p className="font-medium text-white">5:00 AM – 9:00 AM</p>
+                <p className="font-medium text-white">5:00 PM – 9:00 PM</p>
               </div>
               <div>
-                <p className="text-white/40 text-[10px] uppercase font-semibold">Saturday</p>
-                <p className="font-medium text-white">05:30 AM – 09:30 PM</p>
-              </div>
-              <div>
-                <p className="text-white/40 text-[10px] uppercase font-semibold">Sunday</p>
-                <p className="font-medium text-accent">06:00 AM – 01:00 PM</p>
+                <p className="text-white/40 text-[10px] uppercase font-semibold">Sunday (Morning Only)</p>
+                <p className="font-medium text-accent">5:00 AM – 9:00 AM</p>
+                <p className="text-white/40">Evening: Closed</p>
               </div>
               <div className="pt-2 border-t border-white/5">
                 <Link to="/login" className="inline-block text-[11px] text-white/40 hover:text-accent transition">
@@ -105,7 +103,7 @@ export default function Footer() {
             <ul className="space-y-3 text-xs text-white/70">
               <li className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 shrink-0 text-accent mt-0.5" />
-                <span>24 Cross Cut Rd, Gandhipuram, Coimbatore 641012</span>
+                <span>Ingur–Chennimalai Road, near Bajaj Showroom, Chennimalai, Tamil Nadu</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 shrink-0 text-accent" />

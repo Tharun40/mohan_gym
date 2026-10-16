@@ -30,7 +30,13 @@ const getLocalData = (key, fallback) => {
       localStorage.setItem(key, JSON.stringify(fallback));
       return fallback;
     }
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    // Automatically migrate outdated placeholder trainers
+    if (key === KEYS.TRAINERS && Array.isArray(parsed) && parsed.some((t) => t.name === "Mohan Raj" || t.name === "Kavitha Selvan")) {
+      localStorage.setItem(key, JSON.stringify(fallback));
+      return fallback;
+    }
+    return parsed;
   } catch (e) {
     console.error(`Error reading ${key} from storage:`, e);
     return fallback;

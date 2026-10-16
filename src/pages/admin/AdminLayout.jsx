@@ -70,7 +70,7 @@ export default function AdminLayout() {
                 <Shield className="h-5 w-5" />
               </div>
               <div className="overflow-hidden">
-                <p className="truncate text-xs font-bold text-white">{user?.name || "Mohan Raj"}</p>
+                <p className="truncate text-xs font-bold text-white">{user?.name || "Mohan"}</p>
                 <div className="mt-0.5 flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
                   <span className="text-[10px] font-bold text-accent">HEAD ADMINISTRATOR</span>
