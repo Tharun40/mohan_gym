@@ -241,7 +241,16 @@ export const db = {
   async getAttendance() {
     if (isSupabaseConfigured) {
       const { data, error } = await supabase.from("attendance").select("*").order("created_at", { ascending: false });
-      if (!error && data && data.length > 0) return data;
+      if (!error && data && data.length > 0) {
+        return data.map((r) => ({
+          ...r,
+          userId: r.user_id || r.userId,
+          userName: r.user_name || r.userName,
+          checkIn: r.check_in ? (typeof r.check_in === "string" && r.check_in.includes("T") ? new Date(r.check_in).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : r.check_in) : r.checkIn,
+          checkOut: r.check_out ? (typeof r.check_out === "string" && r.check_out.includes("T") ? new Date(r.check_out).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }) : r.check_out) : r.checkOut,
+          date: r.date || (r.created_at ? r.created_at.split("T")[0] : r.date)
+        }));
+      }
     }
     return getLocalData(KEYS.ATTENDANCE, INITIAL_ATTENDANCE);
   },
@@ -265,7 +274,13 @@ export const db = {
     setLocalData(KEYS.ATTENDANCE, records);
 
     if (isSupabaseConfigured) {
-      await supabase.from("attendance").insert(newRecord);
+      const supabasePayload = {
+        user_id: userId,
+        user_name: userName,
+        date: dateStr,
+        check_in: now.toISOString()
+      };
+      await supabase.from("attendance").insert(supabasePayload);
     }
     return newRecord;
   },
@@ -279,7 +294,7 @@ export const db = {
     setLocalData(KEYS.ATTENDANCE, updated);
 
     if (isSupabaseConfigured) {
-      await supabase.from("attendance").update({ check_out: timeStr }).eq("id", attendanceId);
+      await supabase.from("attendance").update({ check_out: now.toISOString() }).eq("id", attendanceId);
     }
     return updated;
   },

@@ -7,11 +7,15 @@ export default function MemberAttendance() {
   const { user } = useAuth();
   const { attendance, recordCheckIn } = useGymData();
 
+  const todayStr = new Date().toISOString().split("T")[0];
   const userAttendance = attendance.filter((a) => a.userId === user?.id);
+  const alreadyCheckedInToday = userAttendance.some((a) => a.date === todayStr);
   const [checkedIn, setCheckedIn] = useState(false);
 
+  const isCheckedIn = checkedIn || alreadyCheckedInToday;
+
   const handleCheckIn = async () => {
-    if (checkedIn) return;
+    if (isCheckedIn) return;
     await recordCheckIn(user?.id, user?.name || "Tharun");
     setCheckedIn(true);
   };
@@ -35,15 +39,15 @@ export default function MemberAttendance() {
         <button
           type="button"
           onClick={handleCheckIn}
-          disabled={checkedIn}
+          disabled={isCheckedIn}
           className={`inline-flex items-center gap-2 rounded-2xl px-6 py-3 text-xs font-bold uppercase tracking-wider transition-all shadow-glow ${
-            checkedIn
+            isCheckedIn
               ? "bg-white/10 text-white/60 border border-white/10"
               : "bg-accent text-black hover:scale-105 cursor-pointer"
           }`}
         >
           <QrCode className="h-4 w-4" />
-          <span>{checkedIn ? "Logged Today" : "Log Check-in Now"}</span>
+          <span>{isCheckedIn ? "Logged Today" : "Log Check-in Now"}</span>
         </button>
       </div>
 
