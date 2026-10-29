@@ -1,0 +1,14 @@
+# robots.txt for Mohan Gym (Chennimalai, Tamil Nadu)
+# Replace https://mohangym.com with your verified production domain upon deployment
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /dashboard/
+Disallow: /dashboard/*
+Disallow: /checkout
+Disallow: /payment-success
+
+# XML Sitemap reference
+Sitemap: https://mohangym.com/sitemap.xml

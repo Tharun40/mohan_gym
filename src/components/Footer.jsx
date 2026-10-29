@@ -1,0 +1,160 @@
+import { Link } from "react-router-dom";
+import logo from "../assets/logo.png";
+import { Instagram, Youtube, Phone, Mail, MapPin, ArrowUp, MessageSquare } from "lucide-react";
+import { getWhatsAppUrl, WHATSAPP_DISPLAY, GENERAL_ENQUIRY_MESSAGE, GYM_EMAIL } from "../utils/whatsapp";
+
+export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <footer className="relative border-t border-white/10 bg-[#080808] px-4 pt-16 pb-12 sm:px-6 lg:px-8 text-white">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
+          {/* Brand Col */}
+          <div className="lg:col-span-2 space-y-4">
+            <Link to="/" className="inline-flex items-center gap-3">
+              <img
+                src={logo}
+                alt="Mohan Gym logo"
+                className="h-11 w-11 rounded-full border border-white/20 object-cover"
+              />
+              <div>
+                <p className="font-display text-base font-bold tracking-[0.2em] text-white">
+                  MOHAN GYM
+                </p>
+                <p className="text-[9px] font-medium tracking-[0.28em] text-accent">
+                  PERFORMANCE CLUB
+                </p>
+              </div>
+            </Link>
+
+            <p className="max-w-sm text-xs leading-relaxed text-white/60">
+              The premier strength, physique conditioning, and transformation sanctuary in Chennimalai. Built for athletes and individuals serious about lasting performance.
+            </p>
+
+            <div className="flex items-center gap-3 pt-2">
+              <a
+                href="#instagram"
+                aria-label="Follow Mohan Gym on Instagram"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent"
+              >
+                <Instagram className="h-4 w-4" />
+              </a>
+              <a
+                href="#youtube"
+                aria-label="Watch Mohan Gym on YouTube"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent"
+              >
+                <Youtube className="h-4 w-4" />
+              </a>
+              <a
+                href={getWhatsAppUrl(GENERAL_ENQUIRY_MESSAGE)}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Chat on WhatsApp"
+                aria-label="Chat on WhatsApp"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent"
+              >
+                <MessageSquare className="h-4 w-4" />
+              </a>
+              <a
+                href={`tel:+919486882451`}
+                aria-label="Call Mohan Gym"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent"
+              >
+                <Phone className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="font-display text-xs font-bold uppercase tracking-[0.25em] text-white/50 mb-4">
+              QUICK LINKS
+            </h4>
+            <ul className="space-y-2.5 text-xs text-white/70">
+              <li><a href="#home" className="hover:text-accent transition">Home</a></li>
+              <li><a href="#about" className="hover:text-accent transition">About Mohan Gym</a></li>
+              <li><a href="#programs" className="hover:text-accent transition">Programs</a></li>
+              <li><a href="#facilities" className="hover:text-accent transition">Facilities & Features</a></li>
+              <li><a href="#trainers" className="hover:text-accent transition">Trainers</a></li>
+              <li><a href="#membership" className="hover:text-accent transition">Membership Plans</a></li>
+              <li><a href="#contact" className="hover:text-accent transition">Contact & Location</a></li>
+            </ul>
+          </div>
+
+          {/* Operating Hours & Access */}
+          <div>
+            <h4 className="font-display text-xs font-bold uppercase tracking-[0.25em] text-white/50 mb-4">
+              CLUB HOURS
+            </h4>
+            <div className="space-y-3 text-xs text-white/70">
+              <div>
+                <p className="text-white/40 text-[10px] uppercase font-semibold">Mon – Sat (Two Sessions)</p>
+                <p className="font-medium text-white">5:00 AM – 9:00 AM</p>
+                <p className="font-medium text-white">5:00 PM – 9:00 PM</p>
+              </div>
+              <div>
+                <p className="text-white/40 text-[10px] uppercase font-semibold">Sunday (Morning Only)</p>
+                <p className="font-medium text-accent">5:00 AM – 9:00 AM</p>
+                <p className="text-white/40">Evening: Closed</p>
+              </div>
+              <div className="pt-2 border-t border-white/5">
+                <Link to="/login" className="inline-block text-[11px] text-white/40 hover:text-accent transition">
+                  Member Login →
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Contact Summary */}
+          <div>
+            <h4 className="font-display text-xs font-bold uppercase tracking-[0.25em] text-white/50 mb-4">
+              CLUB LOCATION
+            </h4>
+            <ul className="space-y-3 text-xs text-white/70">
+              <li className="flex items-start gap-2">
+                <MapPin className="h-4 w-4 shrink-0 text-accent mt-0.5" />
+                <span>Ingur–Chennimalai Road, near Bajaj Showroom, Chennimalai, Tamil Nadu</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <MessageSquare className="h-4 w-4 shrink-0 text-accent" />
+                <a
+                  href={getWhatsAppUrl(GENERAL_ENQUIRY_MESSAGE)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-accent transition font-semibold"
+                >
+                  WhatsApp: {WHATSAPP_DISPLAY}
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone className="h-4 w-4 shrink-0 text-accent" />
+                <a href={`tel:+919486882451`} className="hover:text-accent transition">Call: {WHATSAPP_DISPLAY}</a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Mail className="h-4 w-4 shrink-0 text-accent" />
+                <a href={`mailto:${GYM_EMAIL}`} className="hover:text-accent transition">{GYM_EMAIL}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div className="mt-14 border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
+          <p>© {new Date().getFullYear()} MOHAN GYM Performance Club. All rights reserved.</p>
+
+          <button
+            onClick={scrollToTop}
+            className="inline-flex items-center gap-2 text-white/60 hover:text-accent transition cursor-pointer"
+          >
+            <span>Back to top</span>
+            <ArrowUp className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      </div>
+    </footer>
+  );
+}
