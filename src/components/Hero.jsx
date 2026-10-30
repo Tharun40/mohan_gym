@@ -119,7 +119,7 @@ export default function Hero() {
 
           {/* Description */}
           <p className="mt-6 max-w-lg text-sm leading-relaxed text-white/70 sm:text-base lg:text-[15px]">
-            Train at your own pace. Get stronger, feel better, and become more confident with every workout.
+            Train at your own pace at Mohan Gym in Chennimalai. Master strength training, build fitness, and get stronger with dedicated coaching.
           </p>
 
           {/* CTA */}

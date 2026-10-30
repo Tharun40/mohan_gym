@@ -15,12 +15,12 @@ export default function MemberAttendance() {
   const isCheckedIn = checkedIn || alreadyCheckedInToday;
 
   const handleCheckIn = async () => {
-    if (isCheckedIn) return;
-    await recordCheckIn(user?.id, user?.name || "Tharun");
+    if (isCheckedIn || !user?.id) return;
+    await recordCheckIn(user.id, user.name || "Member");
     setCheckedIn(true);
   };
 
-  const totalCheckIns = userAttendance.length || 18;
+  const totalCheckIns = userAttendance.length;
   const targetDays = 24;
   const percentage = Math.min(100, Math.round((totalCheckIns / targetDays) * 100));
 
@@ -39,10 +39,10 @@ export default function MemberAttendance() {
         <button
           type="button"
           onClick={handleCheckIn}
-          disabled={isCheckedIn}
+          disabled={isCheckedIn || !user?.id}
           className={`inline-flex items-center gap-2 rounded-2xl px-6 py-3 text-xs font-bold uppercase tracking-wider transition-all shadow-glow ${
-            isCheckedIn
-              ? "bg-white/10 text-white/60 border border-white/10"
+            isCheckedIn || !user?.id
+              ? "bg-white/10 text-white/60 border border-white/10 cursor-not-allowed"
               : "bg-accent text-black hover:scale-105 cursor-pointer"
           }`}
         >
@@ -98,18 +98,26 @@ export default function MemberAttendance() {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
-              {userAttendance.map((rec) => (
-                <tr key={rec.id} className="hover:bg-white/[0.02]">
-                  <td className="py-3.5 pl-2 font-bold text-white">{rec.date}</td>
-                  <td className="py-3.5 text-accent font-semibold">{rec.checkIn}</td>
-                  <td className="py-3.5 text-white/70">{rec.checkOut || "Active Workout"}</td>
-                  <td className="py-3.5">
-                    <span className="inline-flex rounded-md bg-accent/15 px-2 py-0.5 text-[10px] font-bold text-accent border border-accent/30">
-                      Verified
-                    </span>
+              {userAttendance.length === 0 ? (
+                <tr>
+                  <td colSpan={4} className="py-8 text-center text-xs text-white/40">
+                    No check-in logs recorded yet. Log your first check-in above.
                   </td>
                 </tr>
-              ))}
+              ) : (
+                userAttendance.map((rec) => (
+                  <tr key={rec.id} className="hover:bg-white/[0.02]">
+                    <td className="py-3.5 pl-2 font-bold text-white">{rec.date}</td>
+                    <td className="py-3.5 text-accent font-semibold">{rec.checkIn}</td>
+                    <td className="py-3.5 text-white/70">{rec.checkOut || "Active Workout"}</td>
+                    <td className="py-3.5">
+                      <span className="inline-flex rounded-md bg-accent/15 px-2 py-0.5 text-[10px] font-bold text-accent border border-accent/30">
+                        Verified
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

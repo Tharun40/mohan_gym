@@ -8,7 +8,7 @@ export const INITIAL_PLANS = [
     description: "Essential floor access for focused training and guided workout charts.",
     features: [
       "Full Gym Floor Access",
-      "Locker Room & Showers",
+      "Strength & Free Weight Area",
       "Workout Chart Included",
       "Standard Equipment Access"
     ],
@@ -24,10 +24,10 @@ export const INITIAL_PLANS = [
     description: "Our most popular comprehensive fitness and diet coaching regimen.",
     features: [
       "Full Gym Floor Access",
-      "Locker Room & Showers",
+      "Cardio & Free Weight Training",
       "Custom Diet Chart Included",
       "1 Free Trainer Consultation",
-      "Recovery Lounge Access"
+      "Progress & Form Guidance"
     ],
     popular: true,
     active: true
@@ -40,12 +40,11 @@ export const INITIAL_PLANS = [
     durationMonths: 12,
     description: "The ultimate elite performance membership with all charts and VIP perks.",
     features: [
-      "Unlimited All-Zone Access",
+      "Full Gym Floor Access",
       "Workout + Diet Chart Included",
       "2 Personal Training Sessions",
-      "Priority Slot Booking",
-      "Free Guest Pass Every Month",
-      "Steam & Recovery Access"
+      "Priority Training Slot Guidance",
+      "Continuous Form & Routine Reviews"
     ],
     popular: false,
     active: true
@@ -384,32 +383,4 @@ export const DIET_PLAN = {
   ]
 };
 
-export const TESTIMONIALS = [
-  {
-    id: 1,
-    name: "Arun Krishnan",
-    role: "Member since 2024",
-    transformation: "-14 kg in 5 months",
-    quote: "Mohan Gym isn't just a place to lift weights; the coaching atmosphere and structured diet chart transformed my physique and daily energy completely.",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
-  },
-  {
-    id: 2,
-    name: "Sneha Reddy",
-    role: "Member since 2025",
-    transformation: "+4 kg lean muscle",
-    quote: "The coaches here care about strict form and progressive overload. The premium environment keeps you laser-focused every morning at 6 AM.",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80"
-  },
-  {
-    id: 3,
-    name: "Dinesh Karthik",
-    role: "Member since 2023",
-    transformation: "Deadlift 100kg → 190kg",
-    quote: "Top-tier equipment, impeccable hygiene, and coaches who know how to program powerlifting cycles. Best gym in town by a mile.",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
-  }
-];
+export const TESTIMONIALS = [];

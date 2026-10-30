@@ -10,12 +10,19 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
     try {
       const saved = localStorage.getItem(AUTH_STORAGE_KEY);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed?.id === "user-member-1" || parsed?.email === "member@mohangym.com") {
+          localStorage.removeItem(AUTH_STORAGE_KEY);
+          return null;
+        }
+        return parsed;
+      }
     } catch (e) {
       console.error("Failed to load auth user:", e);
     }
-    // Default to initial member Tharun for instant evaluation, or null
-    return INITIAL_USERS[1]; // Tharun (member)
+    // Default to unauthenticated (null)
+    return null; // Unauthenticated by default
   });
 
   const [loading, setLoading] = useState(false);

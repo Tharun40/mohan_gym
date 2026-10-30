@@ -7,11 +7,11 @@ export default function MemberProfile() {
   const { user, updateProfile } = useAuth();
 
   const [formData, setFormData] = useState({
-    name: user?.name || "Tharun",
-    email: user?.email || "member@mohangym.com",
-    phone: user?.phone || "+91 98401 23456",
-    fitnessGoals: user?.fitnessGoals || "Hypertrophy, Strength & Lean Muscle Mass",
-    emergencyContact: user?.emergencyContact || "+91 94440 98765"
+    name: user?.name || "",
+    email: user?.email || "",
+    phone: user?.phone || "",
+    fitnessGoals: user?.fitnessGoals || "",
+    emergencyContact: user?.emergencyContact || ""
   });
 
   const [saved, setSaved] = useState(false);

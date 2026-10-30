@@ -1,3 +1,4 @@
+import { usePageSEO } from "../utils/usePageSEO";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Features from "../components/Features";
@@ -11,6 +12,16 @@ import Footer from "../components/Footer";
 import WhatsAppFloatingButton from "../components/ui/WhatsAppFloatingButton";
 
 export default function LandingPage() {
+  usePageSEO({
+    title: "Mohan Gym Chennimalai | Fitness, Strength & Personal Training",
+    description: "Join Mohan Gym in Chennimalai, Tamil Nadu. Explore strength training, fitness programs, coaching and membership plans. Contact us on WhatsApp.",
+    canonicalUrl: "https://mohangym.netlify.app/",
+    ogUrl: "https://mohangym.netlify.app/",
+    ogTitle: "Mohan Gym Chennimalai | Fitness, Strength & Personal Training",
+    ogDescription: "Join Mohan Gym in Chennimalai, Tamil Nadu. Explore strength training, fitness programs, coaching and membership plans. Contact us on WhatsApp.",
+    ogImage: "https://mohangym.netlify.app/logo.png"
+  });
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-canvas font-body text-white antialiased selection:bg-accent selection:text-black">
       {/* Background ambient lighting */}

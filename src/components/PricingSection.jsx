@@ -160,7 +160,7 @@ export default function PricingSection() {
                 {/* Card CTA */}
                 <div className="mt-10 pt-4">
                   <a
-                    href={getPlanWhatsAppUrl(plan)}
+                    href={getPlanWhatsAppUrl(plan, addons.filter((a) => selectedAddonIds.includes(a.id)))}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Enquire about ${plan.name} on WhatsApp`}

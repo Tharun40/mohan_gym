@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, User, Shield, ChevronRight } from "lucide-react";
+import { Menu, X, ChevronRight } from "lucide-react";
 import logo from "../assets/logo.png";
-import { useAuth } from "../context/AuthContext";
 import { getWhatsAppUrl, GENERAL_ENQUIRY_MESSAGE } from "../utils/whatsapp";
 
 const navLinks = [
@@ -18,7 +17,6 @@ const navLinks = [
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user, isAuthenticated, isAdmin } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -75,48 +73,20 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Desktop Right CTA */}
+          {/* Desktop Right CTA - Single Primary JOIN NOW CTA */}
           <div className="hidden items-center gap-3 sm:flex">
-            {isAuthenticated ? (
-              <div className="flex items-center gap-3">
-                <Link
-                  to={isAdmin ? "/admin" : "/dashboard"}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-2 text-xs font-semibold tracking-wider text-white/80 transition-all hover:border-accent/40 hover:text-accent"
-                >
-                  {isAdmin ? <Shield className="h-3.5 w-3.5 text-accent" /> : <User className="h-3.5 w-3.5 text-accent" />}
-                  <span>PORTAL</span>
-                </Link>
-              </div>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-5 py-2.5 text-[11px] font-semibold tracking-[0.2em] text-white backdrop-blur-xl transition duration-300 hover:border-accent/40 hover:text-accent hover:shadow-glow"
-                >
-                  LOG IN
-                </Link>
-                <a
-                  href={getWhatsAppUrl(GENERAL_ENQUIRY_MESSAGE)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-full border border-accent bg-accent px-5 py-2.5 text-[11px] font-bold tracking-[0.2em] text-black shadow-glow transition duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(214,255,62,0.4)] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black"
-                >
-                  JOIN NOW
-                </a>
-              </>
-            )}
+            <a
+              href={getWhatsAppUrl(GENERAL_ENQUIRY_MESSAGE)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full border border-accent bg-accent px-5 py-2.5 text-[11px] font-bold tracking-[0.2em] text-black shadow-glow transition duration-300 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(214,255,62,0.4)] focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-black"
+            >
+              JOIN NOW
+            </a>
           </div>
 
           {/* Mobile Hamburger Toggle */}
           <div className="flex items-center gap-2 lg:hidden">
-            {isAuthenticated && (
-              <Link
-                to={isAdmin ? "/admin" : "/dashboard"}
-                className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[10px] font-semibold text-white/80 sm:hidden"
-              >
-                Portal
-              </Link>
-            )}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80 transition hover:text-accent focus:outline-none"
@@ -152,35 +122,15 @@ export default function Navbar() {
               ))}
 
               <div className="pt-2 flex flex-col gap-2.5">
-                {isAuthenticated ? (
-                  <Link
-                    to={isAdmin ? "/admin" : "/dashboard"}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 py-3 text-xs font-bold tracking-widest text-white transition hover:border-accent hover:text-accent"
-                  >
-                    {isAdmin ? <Shield className="h-4 w-4 text-accent" /> : <User className="h-4 w-4 text-accent" />}
-                    <span>OPEN PORTAL</span>
-                  </Link>
-                ) : (
-                  <>
-                    <Link
-                      to="/login"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex w-full items-center justify-center rounded-xl border border-white/20 bg-white/5 py-3 text-xs font-bold tracking-widest text-white"
-                    >
-                      LOG IN
-                    </Link>
-                    <a
-                      href={getWhatsAppUrl(GENERAL_ENQUIRY_MESSAGE)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex w-full items-center justify-center rounded-xl bg-accent py-3 text-xs font-bold tracking-widest text-black shadow-glow focus:outline-none focus:ring-2 focus:ring-accent"
-                    >
-                      JOIN NOW
-                    </a>
-                  </>
-                )}
+                <a
+                  href={getWhatsAppUrl(GENERAL_ENQUIRY_MESSAGE)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex w-full items-center justify-center rounded-xl bg-accent py-3 text-xs font-bold tracking-widest text-black shadow-glow focus:outline-none focus:ring-2 focus:ring-accent"
+                >
+                  JOIN NOW
+                </a>
               </div>
             </div>
           </motion.div>

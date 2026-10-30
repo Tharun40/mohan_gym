@@ -167,6 +167,7 @@ CREATE POLICY "Admins manage payments" ON public.payments FOR ALL USING (public.
 
 -- Attendance Policies
 CREATE POLICY "Members view own attendance" ON public.attendance FOR SELECT USING (auth.uid() = user_id OR public.is_admin());
+CREATE POLICY "Members and Admins insert attendance" ON public.attendance FOR INSERT WITH CHECK (auth.uid() = user_id OR public.is_admin());
 CREATE POLICY "Admins manage attendance" ON public.attendance FOR ALL USING (public.is_admin());
 
 -- Workout & Diet Policies
@@ -177,9 +178,9 @@ CREATE POLICY "Admins manage diets" ON public.diet_plans FOR ALL USING (public.i
 
 -- Initial Seed Data
 INSERT INTO public.membership_plans (name, price, duration, duration_months, description, features, popular, active) VALUES
-('Basic Plan', 799, '3 Months', 3, 'Essential access for focused training and workout charts.', ARRAY['Full Gym Floor Access', 'Locker Room & Showers', 'Workout Chart Included', 'Standard Equipment Access'], false, true),
-('Premium Plan', 1499, '6 Months', 6, 'Our most popular comprehensive fitness and diet coaching regimen.', ARRAY['Full Gym Floor Access', 'Locker Room & Showers', 'Custom Diet Chart Included', '1 Free Trainer Consultation', 'Recovery Lounge Access'], true, true),
-('Platinum Plan', 2799, '1 Year', 12, 'The ultimate elite performance membership with all charts and VIP perks.', ARRAY['Unlimited All-Zone Access', 'Workout + Diet Chart Included', '2 Personal Training Sessions', 'Priority Slot Booking', 'Free Guest Pass Every Month', 'Steam & Recovery Access'], false, true)
+('Basic Plan', 799, '3 Months', 3, 'Essential access for focused training and workout charts.', ARRAY['Full Gym Floor Access', 'Strength & Free Weight Area', 'Workout Chart Included', 'Standard Equipment Access'], false, true),
+('Premium Plan', 1499, '6 Months', 6, 'Our most popular comprehensive fitness and diet coaching regimen.', ARRAY['Full Gym Floor Access', 'Cardio & Free Weight Training', 'Custom Diet Chart Included', '1 Free Trainer Consultation', 'Progress & Form Guidance'], true, true),
+('Platinum Plan', 2799, '1 Year', 12, 'The ultimate elite performance membership with all charts and VIP perks.', ARRAY['Full Gym Floor Access', 'Workout + Diet Chart Included', '2 Personal Training Sessions', 'Priority Training Slot Guidance', 'Continuous Form & Routine Reviews'], false, true)
 ON CONFLICT DO NOTHING;
 
 INSERT INTO public.addons (name, price, description, active) VALUES

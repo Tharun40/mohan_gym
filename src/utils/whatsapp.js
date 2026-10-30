@@ -124,7 +124,7 @@ export function formatPlanName(name = "") {
  * @param {object|string} plan - Plan object or tier string
  * @returns {string} Formatted WhatsApp message
  */
-export function buildPlanEnquiryMessage(plan) {
+export function buildPlanEnquiryMessage(plan, addons = []) {
   if (!plan) {
     return GENERAL_ENQUIRY_MESSAGE;
   }
@@ -133,13 +133,13 @@ export function buildPlanEnquiryMessage(plan) {
   if (typeof plan === "string") {
     const key = plan.toLowerCase().trim();
     if (key.includes("basic") || key === "799") {
-      return buildPlanEnquiryMessage(PLAN_DEFAULTS.basic);
+      return buildPlanEnquiryMessage(PLAN_DEFAULTS.basic, addons);
     }
     if (key.includes("premium") || key === "1499") {
-      return buildPlanEnquiryMessage(PLAN_DEFAULTS.premium);
+      return buildPlanEnquiryMessage(PLAN_DEFAULTS.premium, addons);
     }
     if (key.includes("platinum") || key === "2799") {
-      return buildPlanEnquiryMessage(PLAN_DEFAULTS.platinum);
+      return buildPlanEnquiryMessage(PLAN_DEFAULTS.platinum, addons);
     }
     if (!key) return GENERAL_ENQUIRY_MESSAGE;
 
@@ -177,7 +177,25 @@ export function buildPlanEnquiryMessage(plan) {
     const detailLines = [];
     if (planName) detailLines.push(`Plan: ${planName}`);
     if (duration) detailLines.push(`Duration: ${duration}`);
-    if (price) detailLines.push(`Price: ${price}`);
+    if (price) detailLines.push(`Base Price: ${price}`);
+
+    if (Array.isArray(addons) && addons.length > 0) {
+      const addonNames = addons
+        .map((a) => (typeof a === "object" ? `${a.name} (+₹${a.price})` : String(a)))
+        .join(", ");
+      detailLines.push(`Selected Add-ons: ${addonNames}`);
+      const addonsSum = addons.reduce(
+        (sum, a) => sum + (typeof a === "object" ? Number(a.price || 0) : 0),
+        0
+      );
+      const numericPrice =
+        typeof plan.price === "number"
+          ? plan.price
+          : Number(String(plan.price || defaultPlan?.price || 0).replace(/[^0-9.]/g, "")) || 0;
+      if (addonsSum > 0 && numericPrice > 0) {
+        detailLines.push(`Estimated Total: ₹${numericPrice + addonsSum}`);
+      }
+    }
 
     const detailsBlock = detailLines.length > 0 ? `\n\n${detailLines.join("\n")}` : "";
     const leadText = planName.toLowerCase().includes("plan") || planName.toLowerCase().includes("membership")
@@ -215,12 +233,13 @@ export function getWhatsAppUrl(message = "") {
  * Matches Basic Plan (₹799/3 Months), Premium Plan (₹1499/6 Months), Platinum Plan (₹2799/1 Year).
  *
  * @param {object|string} plan - Plan object or plan ID
+ * @param {Array} [addons] - Optional list of selected addons
  * @returns {string} WhatsApp URL with exact prefilled message
  */
-export function getPlanWhatsAppUrl(plan) {
+export function getPlanWhatsAppUrl(plan, addons = []) {
   if (!plan) {
     return getWhatsAppUrl(GENERAL_ENQUIRY_MESSAGE);
   }
-  const message = buildPlanEnquiryMessage(plan);
+  const message = buildPlanEnquiryMessage(plan, addons);
   return getWhatsAppUrl(message);
 }

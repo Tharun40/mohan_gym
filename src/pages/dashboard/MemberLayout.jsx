@@ -76,7 +76,7 @@ export default function MemberLayout() {
                 {user?.name ? user.name.charAt(0).toUpperCase() : "M"}
               </div>
               <div className="overflow-hidden">
-                <p className="truncate text-xs font-bold text-white">{user?.name || "Tharun"}</p>
+                <p className="truncate text-xs font-bold text-white">{user?.name || "Member"}</p>
                 <div className="mt-0.5 flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
                   <span className="text-[10px] font-semibold text-accent">
@@ -168,7 +168,7 @@ export default function MemberLayout() {
                 {user?.name ? user.name.charAt(0).toUpperCase() : "M"}
               </div>
               <span className="text-xs font-semibold text-white/90 hidden sm:inline">
-                {user?.name || "Tharun"}
+                {user?.name || "Member"}
               </span>
             </div>
           </div>

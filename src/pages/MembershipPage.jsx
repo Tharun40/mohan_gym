@@ -13,6 +13,7 @@ import {
   Dumbbell
 } from "lucide-react";
 import { useGymData } from "../context/GymDataContext";
+import { usePageSEO } from "../utils/usePageSEO";
 import { INITIAL_PLANS } from "../services/seedData";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -42,6 +43,16 @@ export default function MembershipPage() {
   );
   const [validationError, setValidationError] = useState("");
 
+  usePageSEO({
+    title: "Membership Plans & Pricing | Mohan Gym Chennimalai",
+    description: "Explore transparent membership plans and add-on training packages at Mohan Gym in Chennimalai. Inquire directly on WhatsApp for instant onboarding.",
+    canonicalUrl: "https://mohangym.netlify.app/membership",
+    ogUrl: "https://mohangym.netlify.app/membership",
+    ogTitle: "Membership Plans & Pricing | Mohan Gym Chennimalai",
+    ogDescription: "Explore transparent membership plans and add-on training packages at Mohan Gym in Chennimalai. Inquire directly on WhatsApp for instant onboarding.",
+    ogImage: "https://mohangym.netlify.app/logo.png"
+  });
+
   useEffect(() => {
     if (planParam) {
       setSelectedPlanId(planParam);
@@ -70,7 +81,7 @@ export default function MembershipPage() {
   };
 
   const targetWhatsAppUrl = currentPlan
-    ? getPlanWhatsAppUrl(currentPlan)
+    ? getPlanWhatsAppUrl(currentPlan, selectedAddonsList)
     : getWhatsAppUrl(GENERAL_ENQUIRY_MESSAGE);
 
   const handleContinue = (e) => {
@@ -179,7 +190,7 @@ export default function MembershipPage() {
 
                         <div className="mt-5 pt-3 border-t border-white/10">
                           <a
-                            href={getPlanWhatsAppUrl(plan)}
+                            href={getPlanWhatsAppUrl(plan, selectedAddonsList)}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(e) => e.stopPropagation()}

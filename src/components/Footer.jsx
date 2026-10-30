@@ -101,11 +101,6 @@ export default function Footer() {
                 <p className="font-medium text-accent">5:00 AM – 9:00 AM</p>
                 <p className="text-white/40">Evening: Closed</p>
               </div>
-              <div className="pt-2 border-t border-white/5">
-                <Link to="/login" className="inline-block text-[11px] text-white/40 hover:text-accent transition">
-                  Member Login →
-                </Link>
-              </div>
             </div>
           </div>
 

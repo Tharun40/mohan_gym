@@ -9,15 +9,15 @@ export default function PaymentSuccessPage() {
   const paymentState = location.state || {};
 
   const payment = paymentState.payment || {
-    id: `PAY-${new Date().getFullYear()}-9241`,
-    amount: 2099,
+    id: `PAY-${new Date().getFullYear()}-0001`,
+    amount: 0,
     date: new Date().toISOString().split("T")[0],
-    paymentReference: "UPI-MOHAN-8921734"
+    paymentReference: "MOHAN-GYM"
   };
 
   const plan = paymentState.plan || {
-    name: "Premium Plan",
-    duration: "6 Months"
+    name: "Club Membership",
+    duration: "Selected Term"
   };
 
   const membership = paymentState.membership || {
@@ -26,7 +26,7 @@ export default function PaymentSuccessPage() {
     status: "active"
   };
 
-  const memberName = paymentState.memberName || "Tharun";
+  const memberName = paymentState.memberName || "Member";
   const addons = paymentState.addons || [];
 
   return (
@@ -92,7 +92,7 @@ export default function PaymentSuccessPage() {
 
               <div className="flex justify-between pt-1 text-sm font-bold">
                 <span className="text-white uppercase tracking-wider">Amount Paid</span>
-                <span className="font-display text-lg text-accent">₹{payment.amount || 2099}</span>
+                <span className="font-display text-lg text-accent">₹{payment.amount || 0}</span>
               </div>
             </div>
 

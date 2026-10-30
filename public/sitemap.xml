@@ -1,29 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- XML Sitemap for Mohan Gym (Chennimalai, Tamil Nadu) -->
-<!-- Replace https://mohangym.com with your verified production domain upon deployment -->
+<!-- Production Domain: https://mohangym.netlify.app/ -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mohangym.com/</loc>
-    <lastmod>2026-10-29</lastmod>
+    <loc>https://mohangym.netlify.app/</loc>
+    <lastmod>2026-10-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mohangym.com/membership</loc>
-    <lastmod>2026-10-29</lastmod>
+    <loc>https://mohangym.netlify.app/membership</loc>
+    <lastmod>2026-10-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mohangym.com/login</loc>
-    <lastmod>2026-10-29</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://mohangym.com/register</loc>
-    <lastmod>2026-10-29</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
   </url>
 </urlset>

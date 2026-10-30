@@ -7,18 +7,8 @@ export default function MemberPayments() {
   const { user } = useAuth();
   const { payments } = useGymData();
 
-  const userPayments = payments.filter((p) => p.userId === user?.id || p.userName === user?.name);
-  const displayPayments = userPayments.length > 0 ? userPayments : [
-    {
-      id: "PAY-2026-8901",
-      planName: "Premium Plan",
-      addonsSummary: "Admission Fee (₹300), Diet Chart (₹300)",
-      amount: 2099,
-      status: "Successful",
-      paymentMethod: "UPI / Google Pay",
-      date: "2026-02-12"
-    }
-  ];
+  const userPayments = payments.filter((p) => p.userId === user?.id);
+  const displayPayments = userPayments;
 
   const [selectedInvoice, setSelectedInvoice] = useState(null);
 
@@ -49,33 +39,41 @@ export default function MemberPayments() {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
-              {displayPayments.map((p) => (
-                <tr key={p.id} className="hover:bg-white/[0.02] transition">
-                  <td className="py-4 pl-2 font-mono font-bold text-white">{p.id}</td>
-                  <td className="py-4">
-                    <p className="font-bold text-white">{p.planName}</p>
-                    <p className="text-[11px] text-white/50">{p.addonsSummary || "No Add-ons"}</p>
-                  </td>
-                  <td className="py-4 text-white/70">{p.paymentMethod || "UPI"}</td>
-                  <td className="py-4 text-white/70">{p.date}</td>
-                  <td className="py-4 font-display font-bold text-accent text-sm">₹{p.amount}</td>
-                  <td className="py-4">
-                    <span className="inline-flex rounded-md bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-400 border border-emerald-500/20">
-                      {p.status}
-                    </span>
-                  </td>
-                  <td className="py-4 text-right pr-2">
-                    <button
-                      type="button"
-                      onClick={() => setSelectedInvoice(p)}
-                      className="inline-flex items-center gap-1 rounded-lg border border-white/15 bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-white hover:border-accent hover:text-accent transition cursor-pointer"
-                    >
-                      <Download className="h-3 w-3" />
-                      <span>Invoice</span>
-                    </button>
+              {displayPayments.length === 0 ? (
+                <tr>
+                  <td colSpan={7} className="py-8 text-center text-xs text-white/40">
+                    No payment transactions recorded yet.
                   </td>
                 </tr>
-              ))}
+              ) : (
+                displayPayments.map((p) => (
+                  <tr key={p.id} className="hover:bg-white/[0.02] transition">
+                    <td className="py-4 pl-2 font-mono font-bold text-white">{p.id}</td>
+                    <td className="py-4">
+                      <p className="font-bold text-white">{p.planName}</p>
+                      <p className="text-[11px] text-white/50">{p.addonsSummary || "No Add-ons"}</p>
+                    </td>
+                    <td className="py-4 text-white/70">{p.paymentMethod || "UPI"}</td>
+                    <td className="py-4 text-white/70">{p.date}</td>
+                    <td className="py-4 font-display font-bold text-accent text-sm">₹{p.amount}</td>
+                    <td className="py-4">
+                      <span className="inline-flex rounded-md bg-emerald-500/10 px-2 py-0.5 text-[10px] font-bold text-emerald-400 border border-emerald-500/20">
+                        {p.status}
+                      </span>
+                    </td>
+                    <td className="py-4 text-right pr-2">
+                      <button
+                        type="button"
+                        onClick={() => setSelectedInvoice(p)}
+                        className="inline-flex items-center gap-1 rounded-lg border border-white/15 bg-white/5 px-2.5 py-1 text-[11px] font-semibold text-white hover:border-accent hover:text-accent transition cursor-pointer"
+                      >
+                        <Download className="h-3 w-3" />
+                        <span>Invoice</span>
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
@@ -103,8 +101,8 @@ export default function MemberPayments() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <p className="text-[10px] font-bold uppercase text-white/40">Billed To</p>
-                  <p className="font-bold text-white mt-0.5">{user?.name || "Tharun"}</p>
-                  <p className="text-white/60">{user?.email || "member@mohangym.com"}</p>
+                  <p className="font-bold text-white mt-0.5">{user?.name || "Member"}</p>
+                  <p className="text-white/60">{user?.email || "N/A"}</p>
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase text-white/40">Issued By</p>

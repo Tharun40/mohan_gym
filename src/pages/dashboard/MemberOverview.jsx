@@ -23,31 +23,21 @@ export default function MemberOverview() {
 
   const userMembership =
     memberships.find((m) => m.userId === user?.id && m.status === "active") ||
-    memberships.find((m) => m.userId === user?.id) || {
-      planName: "Premium Membership",
-      status: "active",
-      startDate: "2026-02-12",
-      endDate: "2027-02-12",
-      price: 1499
-    };
+    memberships.find((m) => m.userId === user?.id) ||
+    null;
 
   const userPayments = payments.filter((p) => p.userId === user?.id);
-  const recentPayment = userPayments[0] || {
-    id: "PAY-2026-8901",
-    amount: 2099,
-    date: "2026-02-12",
-    status: "Successful"
-  };
+  const recentPayment = userPayments[0] || null;
 
   const userAttendance = attendance.filter((a) => a.userId === user?.id);
-  const checkInCount = userAttendance.length || 18;
+  const checkInCount = userAttendance.length;
   const targetDays = 24;
 
   const [checkedInToday, setCheckedInToday] = useState(false);
 
   const handleQuickCheckIn = async () => {
-    if (checkedInToday) return;
-    await recordCheckIn(user?.id, user?.name || "Tharun");
+    if (checkedInToday || !user?.id) return;
+    await recordCheckIn(user.id, user.name || "Member");
     setCheckedInToday(true);
   };
 
@@ -61,7 +51,7 @@ export default function MemberOverview() {
             ATHLETE DASHBOARD
           </div>
           <h1 className="mt-2 font-display text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            Welcome back, <span className="text-accent">{user?.name || "Tharun"}</span>
+            Welcome back, <span className="text-accent">{user?.name || "Member"}</span>
           </h1>
           <p className="mt-1 text-xs sm:text-sm text-white/60">
             Here is your daily training overview, active membership status, and attendance log.
@@ -71,9 +61,9 @@ export default function MemberOverview() {
         <button
           type="button"
           onClick={handleQuickCheckIn}
-          disabled={checkedInToday}
+          disabled={checkedInToday || !user?.id}
           className={`inline-flex items-center gap-2 rounded-2xl px-6 py-3.5 text-xs font-bold uppercase tracking-wider transition-all shadow-glow ${
-            checkedInToday
+            checkedInToday || !user?.id
               ? "bg-white/10 text-white/60 border border-white/10 cursor-default"
               : "bg-accent text-black hover:scale-105 hover:shadow-[0_0_30px_rgba(214,255,62,0.4)] cursor-pointer"
           }`}
@@ -104,26 +94,30 @@ export default function MemberOverview() {
             <span className="text-[10px] font-bold uppercase tracking-wider text-white/40">
               MEMBERSHIP
             </span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/15 px-2.5 py-0.5 text-[10px] font-bold text-accent">
-              <span className="h-1.5 w-1.5 rounded-full bg-accent animate-ping" />
-              {userMembership.status?.toUpperCase() || "ACTIVE"}
+            <span className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[10px] font-bold ${
+              userMembership
+                ? "border-accent/40 bg-accent/15 text-accent"
+                : "border-white/20 bg-white/5 text-white/50"
+            }`}>
+              {userMembership && <span className="h-1.5 w-1.5 rounded-full bg-accent animate-ping" />}
+              {userMembership ? (userMembership.status?.toUpperCase() || "ACTIVE") : "NO ACTIVE PLAN"}
             </span>
           </div>
 
           <h3 className="mt-4 font-display text-2xl font-bold text-white">
-            {userMembership.planName || "Premium Membership"}
+            {userMembership ? userMembership.planName : "Not Subscribed"}
           </h3>
 
           <div className="mt-4 border-t border-white/10 pt-4 flex items-center justify-between text-xs">
             <div>
               <p className="text-white/40 text-[10px] uppercase">Expires</p>
-              <p className="font-bold text-white mt-0.5">{userMembership.endDate || "12 Feb 2027"}</p>
+              <p className="font-bold text-white mt-0.5">{userMembership ? (userMembership.endDate || "N/A") : "N/A"}</p>
             </div>
             <Link
               to="/membership"
               className="text-xs font-bold text-accent hover:underline flex items-center gap-1"
             >
-              Renew <ArrowRight className="h-3 w-3" />
+              {userMembership ? "Renew" : "Join Now"} <ArrowRight className="h-3 w-3" />
             </Link>
           </div>
         </motion.div>
@@ -174,26 +168,42 @@ export default function MemberOverview() {
             <span className="text-[10px] font-bold uppercase tracking-wider text-white/40">
               LATEST PAYMENT
             </span>
-            <Receipt className="h-4 w-4 text-accent" />
+            <Receipt className={`h-4 w-4 ${recentPayment ? "text-accent" : "text-white/40"}`} />
           </div>
 
           <div className="mt-4 flex items-baseline justify-between">
             <div>
-              <h3 className="font-display text-3xl font-bold text-white">
-                ₹{recentPayment.amount}
+              <h3 className={`font-display text-3xl font-bold ${recentPayment ? "text-white" : "text-white/50"}`}>
+                {recentPayment ? `₹${recentPayment.amount}` : "₹0"}
               </h3>
-              <p className="text-xs text-white/50 mt-0.5">{recentPayment.date}</p>
+              <p className="text-xs text-white/50 mt-0.5">
+                {recentPayment ? recentPayment.date : "No transactions yet"}
+              </p>
             </div>
-            <span className="rounded-lg bg-emerald-500/20 px-2.5 py-1 text-[10px] font-bold text-emerald-400">
-              {recentPayment.status}
-            </span>
+            {recentPayment ? (
+              <span className="rounded-lg bg-emerald-500/20 px-2.5 py-1 text-[10px] font-bold text-emerald-400">
+                {recentPayment.status}
+              </span>
+            ) : (
+              <span className="rounded-lg bg-white/5 px-2.5 py-1 text-[10px] font-bold text-white/40">
+                None
+              </span>
+            )}
           </div>
 
           <div className="mt-4 border-t border-white/10 pt-4 flex items-center justify-between text-xs">
-            <span className="font-mono text-[11px] text-white/40">{recentPayment.id}</span>
-            <Link to="/dashboard/payments" className="font-bold text-accent hover:underline">
-              View History
-            </Link>
+            <span className="font-mono text-[11px] text-white/40">
+              {recentPayment ? recentPayment.id : "N/A"}
+            </span>
+            {recentPayment ? (
+              <Link to="/dashboard/payments" className="font-bold text-accent hover:underline">
+                View History
+              </Link>
+            ) : (
+              <Link to="/membership" className="font-bold text-accent hover:underline">
+                Subscribe
+              </Link>
+            )}
           </div>
         </motion.div>
       </div>

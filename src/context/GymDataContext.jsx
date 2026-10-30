@@ -1,9 +1,11 @@
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { db } from "../services/db";
+import { useAuth } from "./AuthContext";
 
 const GymDataContext = createContext(null);
 
 export function GymDataProvider({ children }) {
+  const { user } = useAuth();
   const [plans, setPlans] = useState([]);
   const [addons, setAddons] = useState([]);
   const [trainers, setTrainers] = useState([]);
@@ -15,37 +17,69 @@ export function GymDataProvider({ children }) {
 
   const refreshData = useCallback(async () => {
     try {
+      // Public catalog: always available for landing, pricing & trainers sections
       const [
         loadedPlans,
         loadedAddons,
-        loadedTrainers,
-        loadedUsers,
-        loadedMemberships,
-        loadedPayments,
-        loadedAttendance
+        loadedTrainers
       ] = await Promise.all([
         db.getPlans(),
         db.getAddons(),
-        db.getTrainers(),
-        db.getUsers(),
-        db.getMemberships(),
-        db.getPayments(),
-        db.getAttendance()
+        db.getTrainers()
       ]);
 
       setPlans(loadedPlans);
       setAddons(loadedAddons);
       setTrainers(loadedTrainers);
-      setMembers(loadedUsers);
-      setMemberships(loadedMemberships);
-      setPayments(loadedPayments);
-      setAttendance(loadedAttendance);
+
+      // Scoped data: protect sensitive member, payment, and attendance records
+      if (!user) {
+        setMembers([]);
+        setMemberships([]);
+        setPayments([]);
+        setAttendance([]);
+      } else if (user.role === "admin") {
+        const [
+          loadedUsers,
+          loadedMemberships,
+          loadedPayments,
+          loadedAttendance
+        ] = await Promise.all([
+          db.getUsers(),
+          db.getMemberships(),
+          db.getPayments(),
+          db.getAttendance()
+        ]);
+
+        setMembers(loadedUsers);
+        setMemberships(loadedMemberships);
+        setPayments(loadedPayments);
+        setAttendance(loadedAttendance);
+      } else {
+        // Scoped to current authenticated member only
+        const [
+          loadedUsers,
+          loadedMemberships,
+          loadedPayments,
+          loadedAttendance
+        ] = await Promise.all([
+          db.getUsers(),
+          db.getMemberships(),
+          db.getPayments(),
+          db.getAttendance()
+        ]);
+
+        setMembers(loadedUsers.filter((u) => u.id === user.id));
+        setMemberships(loadedMemberships.filter((m) => m.userId === user.id));
+        setPayments(loadedPayments.filter((p) => p.userId === user.id));
+        setAttendance(loadedAttendance.filter((a) => a.userId === user.id));
+      }
     } catch (e) {
       console.error("Failed to load gym data:", e);
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     refreshData();

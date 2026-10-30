@@ -37,9 +37,9 @@ export default function CheckoutPage() {
 
   // Form & Payment States
   const [paymentMethod, setPaymentMethod] = useState("UPI");
-  const [guestName, setGuestName] = useState(user?.name || "Tharun");
-  const [guestEmail, setGuestEmail] = useState(user?.email || "member@mohangym.com");
-  const [guestPhone, setGuestPhone] = useState(user?.phone || "+91 98401 23456");
+  const [guestName, setGuestName] = useState(user?.name || "");
+  const [guestEmail, setGuestEmail] = useState(user?.email || "");
+  const [guestPhone, setGuestPhone] = useState(user?.phone || "");
 
   const [upiId, setUpiId] = useState("mohan.gym@okaxis");
   const [cardNumber, setCardNumber] = useState("4532 •••• •••• 8821");
@@ -53,7 +53,7 @@ export default function CheckoutPage() {
     if (user) {
       setGuestName(user.name);
       setGuestEmail(user.email);
-      setGuestPhone(user.phone || "+91 98401 23456");
+      setGuestPhone(user.phone || "");
     }
   }, [user]);
 

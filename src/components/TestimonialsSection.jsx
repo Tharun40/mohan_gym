@@ -1,7 +1,48 @@
 import { motion } from "framer-motion";
-import { Star, Quote, TrendingUp } from "lucide-react";
-import { TESTIMONIALS } from "../services/seedData";
+import { Target, Dumbbell, Users, Check } from "lucide-react";
 import SectionIntro from "./ui/SectionIntro";
+
+const JOURNEY_PILLARS = [
+  {
+    id: "consistency",
+    icon: Target,
+    tag: "CONSISTENCY",
+    title: "Show Up & Build the Habit",
+    description:
+      "Real fitness isn't built on shortcuts or overnight promises. Lasting results come from showing up day after day, embracing the routine, and celebrating small, consistent victories.",
+    highlights: [
+      "Sustainable daily training habits",
+      "Realistic personal milestones",
+      "Progress that lasts a lifetime"
+    ]
+  },
+  {
+    id: "strength",
+    icon: Dumbbell,
+    tag: "STRENGTH & FORM",
+    title: "Guided by Experience",
+    description:
+      "Master the fundamental lifts and workouts with dedicated coach guidance. We prioritize safe technique and structured progression so you build real strength with confidence.",
+    highlights: [
+      "Focus on proper movement form",
+      "Safe, structured progressive overload",
+      "Support for all fitness backgrounds"
+    ]
+  },
+  {
+    id: "discipline",
+    icon: Users,
+    tag: "DISCIPLINE & COMMUNITY",
+    title: "Train with Real Purpose",
+    description:
+      "Step into an honest, motivating environment where everyone is working hard towards their goals. Whatever your starting point, Mohan Gym is a space dedicated to your personal growth.",
+    highlights: [
+      "Welcoming and respectful floor",
+      "Distraction-free workout atmosphere",
+      "Culture built on mutual respect"
+    ]
+  }
+];
 
 export default function TestimonialsSection() {
   return (
@@ -11,65 +52,60 @@ export default function TestimonialsSection() {
 
       <div className="mx-auto max-w-7xl">
         <SectionIntro
-          eyebrow="PROVEN TRANSFORMATIONS"
-          title="Real Results From Committed Members"
-          description="Hear from athletes and members who elevated their strength, discipline, and physical composition with our tailored coaching."
+          eyebrow="COMMITTED TO PROGRESS"
+          title="Your Fitness Journey Starts Here"
+          description="At Mohan Gym, progress is built on everyday discipline, patient guidance, and consistent effort. No gimmicks — just honest training and real personal development."
         />
 
         <div className="mt-16 grid gap-8 md:grid-cols-3">
-          {TESTIMONIALS.map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 35 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: index * 0.15 }}
-              whileHover={{ y: -6 }}
-              className="relative flex flex-col justify-between rounded-3xl border border-white/10 bg-white/[0.03] p-8 shadow-glass backdrop-blur-2xl transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05]"
-            >
-              <div>
-                {/* Rating stars & Quote icon */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1 text-accent">
-                    {[...Array(item.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-accent" />
-                    ))}
-                  </div>
-                  <Quote className="h-6 w-6 text-white/20" />
-                </div>
-
-                {/* Transformation tag */}
-                <div className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-[11px] font-bold text-accent">
-                  <TrendingUp className="h-3 w-3" />
-                  {item.transformation}
-                </div>
-
-                {/* Quote Text */}
-                <p className="mt-5 text-sm leading-relaxed text-white/80 italic">
-                  "{item.quote}"
-                </p>
-              </div>
-
-              {/* Author Info */}
-              <div className="mt-8 border-t border-white/10 pt-6 flex items-center gap-4">
-                <img
-                  src={item.avatar}
-                  alt={`${item.name} — Member at Mohan Gym`}
-                  loading="lazy"
-                  decoding="async"
-                  width="48"
-                  height="48"
-                  className="h-12 w-12 rounded-full border border-white/20 object-cover"
-                />
+          {JOURNEY_PILLARS.map((pillar, index) => {
+            const Icon = pillar.icon;
+            return (
+              <motion.div
+                key={pillar.id}
+                initial={{ opacity: 0, y: 35 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: index * 0.15 }}
+                whileHover={{ y: -6 }}
+                className="relative flex flex-col justify-between rounded-3xl border border-white/10 bg-white/[0.03] p-8 shadow-glass backdrop-blur-2xl transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05]"
+              >
                 <div>
-                  <h4 className="font-display text-base font-bold text-white">
-                    {item.name}
-                  </h4>
-                  <p className="text-xs text-white/50">{item.role}</p>
+                  {/* Icon & Category Tag */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-accent/30 bg-accent/10 text-accent">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent/90">
+                      {pillar.tag}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="mt-6 font-display text-2xl font-bold text-white">
+                    {pillar.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="mt-4 text-sm leading-relaxed text-white/70">
+                    {pillar.description}
+                  </p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+
+                {/* Highlights List */}
+                <div className="mt-8 border-t border-white/10 pt-6">
+                  <ul className="space-y-2.5 text-xs text-white/60">
+                    {pillar.highlights.map((point, i) => (
+                      <li key={i} className="flex items-center gap-2">
+                        <Check className="h-3.5 w-3.5 text-accent shrink-0" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

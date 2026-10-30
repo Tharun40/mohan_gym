@@ -36,6 +36,11 @@ const getLocalData = (key, fallback) => {
       localStorage.setItem(key, JSON.stringify(fallback));
       return fallback;
     }
+    // Automatically migrate outdated plans containing unverified claims (lockers, showers, recovery lounge, steam)
+    if (key === KEYS.PLANS && Array.isArray(parsed) && JSON.stringify(parsed).toLowerCase().match(/locker|shower|recovery lounge|steam/)) {
+      localStorage.setItem(key, JSON.stringify(fallback));
+      return fallback;
+    }
     return parsed;
   } catch (e) {
     console.error(`Error reading ${key} from storage:`, e);
@@ -140,7 +145,7 @@ export const db = {
   async getUsers() {
     if (isSupabaseConfigured) {
       const { data, error } = await supabase.from("profiles").select("*");
-      if (!error && data && data.length > 0) return data;
+      if (!error && data) return data;
     }
     return getLocalData(KEYS.USERS, INITIAL_USERS);
   },
@@ -160,7 +165,7 @@ export const db = {
   async getMemberships() {
     if (isSupabaseConfigured) {
       const { data, error } = await supabase.from("memberships").select("*");
-      if (!error && data && data.length > 0) return data;
+      if (!error && data) return data;
     }
     return getLocalData(KEYS.MEMBERSHIPS, INITIAL_MEMBERSHIPS);
   },
@@ -204,7 +209,7 @@ export const db = {
   async getPayments() {
     if (isSupabaseConfigured) {
       const { data, error } = await supabase.from("payments").select("*").order("date", { ascending: false });
-      if (!error && data && data.length > 0) return data;
+      if (!error && data) return data;
     }
     return getLocalData(KEYS.PAYMENTS, INITIAL_PAYMENTS);
   },
@@ -241,7 +246,7 @@ export const db = {
   async getAttendance() {
     if (isSupabaseConfigured) {
       const { data, error } = await supabase.from("attendance").select("*").order("created_at", { ascending: false });
-      if (!error && data && data.length > 0) {
+      if (!error && data) {
         return data.map((r) => ({
           ...r,
           userId: r.user_id || r.userId,
